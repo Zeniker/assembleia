@@ -3,6 +3,7 @@ package br.com.guilherme.assembleia.sessao.service;
 import br.com.guilherme.assembleia.pauta.service.PautaService;
 import br.com.guilherme.assembleia.sessao.dto.AbrirSessaoRequestDTO;
 import br.com.guilherme.assembleia.sessao.dto.ResultadoSessaoDTO;
+import br.com.guilherme.assembleia.sessao.exceptions.SessaoAbertaException;
 import br.com.guilherme.assembleia.sessao.exceptions.SessaoNaoEncontradaException;
 import br.com.guilherme.assembleia.sessao.model.Sessao;
 import br.com.guilherme.assembleia.sessao.model.SituacaoVotacao;
@@ -66,6 +67,7 @@ public class SessaoService {
 
     public ResultadoSessaoDTO buscarResultadoSessao(Integer id) {
         Sessao sessao = buscarSessaoPorId(id);
+        if (sessao.isSessaoAberta()) throw new SessaoAbertaException();
 
         List<Voto> votos = votoRepository.findBySessao(sessao);
 

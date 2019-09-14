@@ -4,6 +4,7 @@ import br.com.guilherme.assembleia.pauta.model.Pauta;
 import br.com.guilherme.assembleia.pauta.service.PautaService;
 import br.com.guilherme.assembleia.sessao.dto.AbrirSessaoRequestDTO;
 import br.com.guilherme.assembleia.sessao.dto.ResultadoSessaoDTO;
+import br.com.guilherme.assembleia.sessao.exceptions.SessaoAbertaException;
 import br.com.guilherme.assembleia.sessao.exceptions.SessaoNaoEncontradaException;
 import br.com.guilherme.assembleia.sessao.model.Sessao;
 import br.com.guilherme.assembleia.sessao.model.SituacaoVotacao;
@@ -147,10 +148,28 @@ class SessaoServiceTest {
         });
     }
 
+    @DisplayName("Teste busca resultado sessão inválida")
+    @Test
+    void buscarResultadoSessaoInvalida() {
+        //given
+        sessao.setSessaoAberta(true);
+
+        given(sessaoRepository.findById(any())).willReturn(Optional.of(sessao));
+
+        //when
+        assertThrows(SessaoAbertaException.class, () -> sessaoService.buscarResultadoSessao(1));
+
+        //then
+        then(sessaoRepository).should().findById(any());
+
+
+    }
+
     @DisplayName("Teste busca resultado sessão aprovada")
     @Test
     void buscarResultadoSessaoAprovada() {
         //given
+        sessao.setSessaoAberta(false);
         List<Voto> votoList = Arrays.asList(votoAFavor, votoContra, votoAFavor);
 
         given(sessaoRepository.findById(any())).willReturn(Optional.of(sessao));
@@ -168,6 +187,7 @@ class SessaoServiceTest {
     @Test
     void buscarResultadoSessaoReprovada() {
         //given
+        sessao.setSessaoAberta(false);
         List<Voto> votoList = Arrays.asList(votoAFavor, votoContra, votoContra);
 
         given(sessaoRepository.findById(any())).willReturn(Optional.of(sessao));
@@ -185,6 +205,7 @@ class SessaoServiceTest {
     @Test
     void buscarResultadoSessaoEmpatada() {
         //given
+        sessao.setSessaoAberta(false);
         List<Voto> votoList = Arrays.asList(votoAFavor, votoContra);
 
         given(sessaoRepository.findById(any())).willReturn(Optional.of(sessao));
