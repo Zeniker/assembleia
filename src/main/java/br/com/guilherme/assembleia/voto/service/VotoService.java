@@ -9,6 +9,8 @@ import br.com.guilherme.assembleia.voto.model.Voto;
 import br.com.guilherme.assembleia.voto.repository.VotoRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class VotoService {
 
@@ -38,5 +40,12 @@ public class VotoService {
         if(!sessao.isSessaoAberta()) throw new SessaoFechadaException();
 
         if(votoRepository.findByCpfAssociado(cpfAssociado).isPresent()) throw new AssociadoJaVotouException();
+    }
+
+
+    public List<Voto> buscarVotosDaSessao(Integer idSessao) {
+        Sessao sessao = sessaoService.buscarSessaoPorId(idSessao);
+
+        return votoRepository.findBySessao(sessao);
     }
 }

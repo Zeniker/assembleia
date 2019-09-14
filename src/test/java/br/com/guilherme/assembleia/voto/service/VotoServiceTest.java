@@ -18,6 +18,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -106,5 +108,22 @@ class VotoServiceTest {
         //then
         then(sessaoService).should().buscarSessaoPorId(1);
         then(votoRepository).should().findByCpfAssociado(anyString());
+    }
+
+    @DisplayName("Buscar votos registrados para uma sessão")
+    @Test
+    void buscarVotosDaSessao() {
+        //given
+        List<Voto> votos = Arrays.asList(new Voto(), new Voto());
+
+        given(sessaoService.buscarSessaoPorId(any())).willReturn(sessao);
+        given(votoRepository.findBySessao(any(Sessao.class))).willReturn(votos);
+
+        //when
+        List<Voto> votosDaSessao = votoService.buscarVotosDaSessao(1);
+
+        //then
+        then(votoRepository).should().findBySessao(any(Sessao.class));
+        assertThat(votosDaSessao).hasSize(2);
     }
 }
