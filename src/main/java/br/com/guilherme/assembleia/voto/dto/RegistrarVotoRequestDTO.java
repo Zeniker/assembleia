@@ -2,10 +2,17 @@ package br.com.guilherme.assembleia.voto.dto;
 
 import br.com.guilherme.assembleia.voto.model.VotoEscolha;
 
-public class RegistrarVotoDTO {
+import javax.validation.constraints.NotNull;
 
+public class RegistrarVotoRequestDTO {
+
+    @NotNull
     private String cpf;
+
+    @NotNull
     private Integer sessaoVotada;
+
+    @NotNull
     private VotoEscolha escolha;
 
     public String getCpf() {

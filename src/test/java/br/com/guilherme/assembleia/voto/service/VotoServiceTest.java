@@ -3,7 +3,7 @@ package br.com.guilherme.assembleia.voto.service;
 import br.com.guilherme.assembleia.sessao.exceptions.SessaoFechadaException;
 import br.com.guilherme.assembleia.sessao.model.Sessao;
 import br.com.guilherme.assembleia.sessao.service.SessaoService;
-import br.com.guilherme.assembleia.voto.dto.RegistrarVotoDTO;
+import br.com.guilherme.assembleia.voto.dto.RegistrarVotoRequestDTO;
 import br.com.guilherme.assembleia.voto.exception.AssociadoJaVotouException;
 import br.com.guilherme.assembleia.voto.model.Voto;
 import br.com.guilherme.assembleia.voto.model.VotoEscolha;
@@ -45,14 +45,14 @@ class VotoServiceTest {
     private ArgumentCaptor<Voto> captor;
 
     private Sessao sessao;
-    private RegistrarVotoDTO registrarVotoDTO;
+    private RegistrarVotoRequestDTO registrarVotoDTO;
 
     @BeforeEach
     void setUp() {
         sessao = new Sessao();
         sessao.setId(1);
 
-        registrarVotoDTO = new RegistrarVotoDTO();
+        registrarVotoDTO = new RegistrarVotoRequestDTO();
         registrarVotoDTO.setCpf("72332314431");
         registrarVotoDTO.setEscolha(VotoEscolha.SIM);
         registrarVotoDTO.setSessaoVotada(1);

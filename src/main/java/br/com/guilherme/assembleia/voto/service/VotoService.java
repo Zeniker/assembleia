@@ -3,7 +3,7 @@ package br.com.guilherme.assembleia.voto.service;
 import br.com.guilherme.assembleia.sessao.exceptions.SessaoFechadaException;
 import br.com.guilherme.assembleia.sessao.model.Sessao;
 import br.com.guilherme.assembleia.sessao.service.SessaoService;
-import br.com.guilherme.assembleia.voto.dto.RegistrarVotoDTO;
+import br.com.guilherme.assembleia.voto.dto.RegistrarVotoRequestDTO;
 import br.com.guilherme.assembleia.voto.exception.AssociadoJaVotouException;
 import br.com.guilherme.assembleia.voto.model.Voto;
 import br.com.guilherme.assembleia.voto.repository.VotoRepository;
@@ -23,7 +23,7 @@ public class VotoService {
         this.sessaoService = sessaoService;
     }
 
-    public Voto registrarVoto(RegistrarVotoDTO registrarVotoDTO) {
+    public Voto registrarVoto(RegistrarVotoRequestDTO registrarVotoDTO) {
         Sessao sessao = sessaoService.buscarSessaoPorId(registrarVotoDTO.getSessaoVotada());
 
         validaVotacao(sessao, registrarVotoDTO.getCpf());
