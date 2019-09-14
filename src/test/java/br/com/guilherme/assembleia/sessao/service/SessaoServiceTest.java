@@ -10,9 +10,8 @@ import br.com.guilherme.assembleia.sessao.model.SituacaoVotacao;
 import br.com.guilherme.assembleia.sessao.repository.SessaoRepository;
 import br.com.guilherme.assembleia.voto.model.Voto;
 import br.com.guilherme.assembleia.voto.model.VotoEscolha;
-import br.com.guilherme.assembleia.voto.service.VotoService;
+import br.com.guilherme.assembleia.voto.repository.VotoRepository;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -45,7 +44,7 @@ class SessaoServiceTest {
     private PautaService pautaService;
 
     @Mock
-    private VotoService votoService;
+    private VotoRepository votoRepository;
 
     @InjectMocks
     private SessaoService sessaoService;
@@ -154,7 +153,8 @@ class SessaoServiceTest {
         //given
         List<Voto> votoList = Arrays.asList(votoAFavor, votoContra, votoAFavor);
 
-        given(votoService.buscarVotosDaSessao(any(Integer.class))).willReturn(votoList);
+        given(sessaoRepository.findById(any())).willReturn(Optional.of(sessao));
+        given(votoRepository.findBySessao(any(Sessao.class))).willReturn(votoList);
 
         //when
         ResultadoSessaoDTO resultadoSessao = sessaoService.buscarResultadoSessao(1);
@@ -170,7 +170,8 @@ class SessaoServiceTest {
         //given
         List<Voto> votoList = Arrays.asList(votoAFavor, votoContra, votoContra);
 
-        given(votoService.buscarVotosDaSessao(any(Integer.class))).willReturn(votoList);
+        given(sessaoRepository.findById(any())).willReturn(Optional.of(sessao));
+        given(votoRepository.findBySessao(any(Sessao.class))).willReturn(votoList);
 
         //when
         ResultadoSessaoDTO resultadoSessao = sessaoService.buscarResultadoSessao(1);
@@ -186,7 +187,8 @@ class SessaoServiceTest {
         //given
         List<Voto> votoList = Arrays.asList(votoAFavor, votoContra);
 
-        given(votoService.buscarVotosDaSessao(any(Integer.class))).willReturn(votoList);
+        given(sessaoRepository.findById(any())).willReturn(Optional.of(sessao));
+        given(votoRepository.findBySessao(any(Sessao.class))).willReturn(votoList);
 
         //when
         ResultadoSessaoDTO resultadoSessao = sessaoService.buscarResultadoSessao(1);

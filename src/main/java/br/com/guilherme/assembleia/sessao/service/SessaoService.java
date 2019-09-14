@@ -9,7 +9,7 @@ import br.com.guilherme.assembleia.sessao.model.SituacaoVotacao;
 import br.com.guilherme.assembleia.sessao.repository.SessaoRepository;
 import br.com.guilherme.assembleia.voto.model.Voto;
 import br.com.guilherme.assembleia.voto.model.VotoEscolha;
-import br.com.guilherme.assembleia.voto.service.VotoService;
+import br.com.guilherme.assembleia.voto.repository.VotoRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,12 +24,12 @@ public class SessaoService {
 
     private PautaService pautaService;
 
-    private VotoService votoService;
+    private VotoRepository votoRepository;
 
-    public SessaoService(SessaoRepository sessaoRepository, PautaService pautaService, VotoService votoService) {
+    public SessaoService(SessaoRepository sessaoRepository, PautaService pautaService, VotoRepository votoRepository) {
         this.sessaoRepository = sessaoRepository;
         this.pautaService = pautaService;
-        this.votoService = votoService;
+        this.votoRepository = votoRepository;
     }
 
 
@@ -70,7 +70,9 @@ public class SessaoService {
     }
 
     public ResultadoSessaoDTO buscarResultadoSessao(Integer id) {
-        List<Voto> votos = votoService.buscarVotosDaSessao(id);
+        Sessao sessao = buscarSessaoPorId(id);
+
+        List<Voto> votos = votoRepository.findBySessao(sessao);
 
         Integer totalAFavor = votos.stream()
                 .filter(voto -> voto.getEscolha() == VotoEscolha.SIM)
