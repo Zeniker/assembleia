@@ -52,18 +52,13 @@ public class SessaoService {
     }
 
     private void agendaFechamentoSessao(final Sessao sessao, Integer segundosParaFechar){
-        TimerTask tarefaFechamento = new TimerTask() {
-            @Override
-            public void run() {
-                fecharSessao(sessao.getId());
-            }
-        };
+        TimerTask tarefaFechamento = new EncerramentoSessaoTask(this, sessao.getId());
 
         Timer timer = new Timer("Fechamento de Sessão");
         timer.schedule(tarefaFechamento, segundosParaFechar * 1000);
     }
 
-    private void fecharSessao(Integer idSessao) {
+    public void fecharSessao(Integer idSessao) {
         Sessao sessao = this.buscarSessaoPorId(idSessao);
         sessao.setSessaoAberta(false);
         sessaoRepository.save(sessao);
