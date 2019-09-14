@@ -2,13 +2,20 @@ package br.com.guilherme.assembleia.sessao.service;
 
 import br.com.guilherme.assembleia.pauta.service.PautaService;
 import br.com.guilherme.assembleia.sessao.dto.AbrirSessaoDTO;
+import br.com.guilherme.assembleia.sessao.dto.ResultadoSessaoDTO;
 import br.com.guilherme.assembleia.sessao.exceptions.SessaoNaoEncontradaException;
 import br.com.guilherme.assembleia.sessao.model.Sessao;
+import br.com.guilherme.assembleia.sessao.model.SituacaoVotacao;
 import br.com.guilherme.assembleia.sessao.repository.SessaoRepository;
+import br.com.guilherme.assembleia.voto.model.Voto;
+import br.com.guilherme.assembleia.voto.model.VotoEscolha;
+import br.com.guilherme.assembleia.voto.service.VotoService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.stream.Collectors;
 
 @Service
 public class SessaoService {
@@ -17,9 +24,12 @@ public class SessaoService {
 
     private PautaService pautaService;
 
-    public SessaoService(SessaoRepository sessaoRepository, PautaService pautaService) {
+    private VotoService votoService;
+
+    public SessaoService(SessaoRepository sessaoRepository, PautaService pautaService, VotoService votoService) {
         this.sessaoRepository = sessaoRepository;
         this.pautaService = pautaService;
+        this.votoService = votoService;
     }
 
 
@@ -57,5 +67,25 @@ public class SessaoService {
         Sessao sessao = this.buscarSessaoPorId(idSessao);
         sessao.setSessaoAberta(false);
         sessaoRepository.save(sessao);
+    }
+
+    public ResultadoSessaoDTO buscarResultadoSessao(Integer id) {
+        List<Voto> votos = votoService.buscarVotosDaSessao(id);
+
+        Integer totalAFavor = votos.stream()
+                .filter(voto -> voto.getEscolha() == VotoEscolha.SIM)
+                .collect(Collectors.toList())
+                .size();
+        Integer totalContra = votos.stream()
+                .filter(voto -> voto.getEscolha() == VotoEscolha.NAO)
+                .collect(Collectors.toList())
+                .size();
+
+        ResultadoSessaoDTO resultado = new ResultadoSessaoDTO();
+        resultado.setTotalVotos(votos.size());
+        resultado.setSituacao(SituacaoVotacao.getSituacao(totalAFavor, totalContra));
+
+
+        return resultado;
     }
 }

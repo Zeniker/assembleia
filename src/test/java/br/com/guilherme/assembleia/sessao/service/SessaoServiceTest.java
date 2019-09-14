@@ -3,10 +3,16 @@ package br.com.guilherme.assembleia.sessao.service;
 import br.com.guilherme.assembleia.pauta.model.Pauta;
 import br.com.guilherme.assembleia.pauta.service.PautaService;
 import br.com.guilherme.assembleia.sessao.dto.AbrirSessaoDTO;
+import br.com.guilherme.assembleia.sessao.dto.ResultadoSessaoDTO;
 import br.com.guilherme.assembleia.sessao.exceptions.SessaoNaoEncontradaException;
 import br.com.guilherme.assembleia.sessao.model.Sessao;
+import br.com.guilherme.assembleia.sessao.model.SituacaoVotacao;
 import br.com.guilherme.assembleia.sessao.repository.SessaoRepository;
+import br.com.guilherme.assembleia.voto.model.Voto;
+import br.com.guilherme.assembleia.voto.model.VotoEscolha;
+import br.com.guilherme.assembleia.voto.service.VotoService;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -17,6 +23,8 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.Duration;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -36,6 +44,9 @@ class SessaoServiceTest {
     @Mock
     private PautaService pautaService;
 
+    @Mock
+    private VotoService votoService;
+
     @InjectMocks
     private SessaoService sessaoService;
 
@@ -45,6 +56,8 @@ class SessaoServiceTest {
     private Sessao sessao;
     private AbrirSessaoDTO abrirSessaoDTO;
     private Pauta pauta;
+    private Voto votoContra;
+    private Voto votoAFavor;
 
     @BeforeEach
     void setUp() {
@@ -57,6 +70,13 @@ class SessaoServiceTest {
 
         pauta = new Pauta();
         pauta.setId(1);
+
+
+        votoAFavor = new Voto();
+        votoAFavor.setEscolha(VotoEscolha.SIM);
+
+        votoContra = new Voto();
+        votoContra.setEscolha(VotoEscolha.NAO);
     }
 
     @DisplayName("Teste abrir sessão")
@@ -126,6 +146,53 @@ class SessaoServiceTest {
             then(sessaoRepository).should(times(2)).save(any());
             assertThat(sessao.isSessaoAberta()).isEqualTo(false);
         });
+    }
 
+    @DisplayName("Teste busca resultado sessão aprovada")
+    @Test
+    void buscarResultadoSessaoAprovada() {
+        //given
+        List<Voto> votoList = Arrays.asList(votoAFavor, votoContra, votoAFavor);
+
+        given(votoService.buscarVotosDaSessao(any(Integer.class))).willReturn(votoList);
+
+        //when
+        ResultadoSessaoDTO resultadoSessao = sessaoService.buscarResultadoSessao(1);
+
+        //then
+        assertThat(resultadoSessao.getTotalVotos()).isEqualTo(3);
+        assertThat(resultadoSessao.getSituacao()).isEqualTo(SituacaoVotacao.APROVADA);
+    }
+
+    @DisplayName("Teste busca resultado sessão reprovada")
+    @Test
+    void buscarResultadoSessaoReprovada() {
+        //given
+        List<Voto> votoList = Arrays.asList(votoAFavor, votoContra, votoContra);
+
+        given(votoService.buscarVotosDaSessao(any(Integer.class))).willReturn(votoList);
+
+        //when
+        ResultadoSessaoDTO resultadoSessao = sessaoService.buscarResultadoSessao(1);
+
+        //then
+        assertThat(resultadoSessao.getTotalVotos()).isEqualTo(3);
+        assertThat(resultadoSessao.getSituacao()).isEqualTo(SituacaoVotacao.REPROVADA);
+    }
+
+    @DisplayName("Teste busca resultado sessão empatada")
+    @Test
+    void buscarResultadoSessaoEmpatada() {
+        //given
+        List<Voto> votoList = Arrays.asList(votoAFavor, votoContra);
+
+        given(votoService.buscarVotosDaSessao(any(Integer.class))).willReturn(votoList);
+
+        //when
+        ResultadoSessaoDTO resultadoSessao = sessaoService.buscarResultadoSessao(1);
+
+        //then
+        assertThat(resultadoSessao.getTotalVotos()).isEqualTo(2);
+        assertThat(resultadoSessao.getSituacao()).isEqualTo(SituacaoVotacao.EMPATE);
     }
 }
