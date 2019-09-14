@@ -7,6 +7,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -27,6 +29,9 @@ public class PautaServiceTest {
     @InjectMocks
     private PautaService pautaService;
 
+    @Captor
+    private ArgumentCaptor<Pauta> captor;
+
     private Pauta pauta;
 
     @BeforeEach
@@ -38,17 +43,18 @@ public class PautaServiceTest {
     @Test
     void criarPauta() {
         //given
-        given(pautaRepository.save(any(Pauta.class))).willReturn(pauta);
+        given(pautaRepository.save(captor.capture())).willReturn(pauta);
 
         //when
         NovaPautaDTO novaPautaDTO = new NovaPautaDTO();
-        novaPautaDTO.setAssunto("");
+        novaPautaDTO.setAssunto("Assunto");
 
         Pauta pautaSalva = pautaService.criarPauta(novaPautaDTO);
 
         //then
         then(pautaRepository).should().save(any(Pauta.class));
         assertThat(pautaSalva).isNotNull();
+        assertThat(captor.getValue().getAssunto()).isEqualTo("Assunto");
     }
 
     @DisplayName("Teste buscar pauta por Id")
