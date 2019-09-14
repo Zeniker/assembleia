@@ -5,6 +5,7 @@ import br.com.guilherme.assembleia.commons.dto.StatusResposta;
 import br.com.guilherme.assembleia.pauta.exceptions.PautaNaoEncontradaException;
 import br.com.guilherme.assembleia.sessao.dto.AbrirSessaoRequestDTO;
 import br.com.guilherme.assembleia.sessao.dto.AbrirSessaoResponseDTO;
+import br.com.guilherme.assembleia.sessao.dto.ResultadoSessaoDTO;
 import br.com.guilherme.assembleia.sessao.model.Sessao;
 import br.com.guilherme.assembleia.sessao.service.SessaoService;
 import org.junit.jupiter.api.DisplayName;
@@ -60,6 +61,39 @@ class SessaoControllerTest {
 
         //then
         then(sessaoService).should().abrirSessao(any(AbrirSessaoRequestDTO.class));
+        assertThat(responseDTO.getStatus()).isEqualTo(StatusResposta.ERRO);
+    }
+
+    @DisplayName("Teste buscar resultado sessão")
+    @Test
+    void buscarResultadoSessao() {
+        //given
+        ResultadoSessaoDTO resultado = new ResultadoSessaoDTO();
+
+        given(sessaoService.buscarResultadoSessao(any(Integer.class))).willReturn(resultado);
+
+        //when
+        ResponseDTO<ResultadoSessaoDTO> responseDTO = sessaoController.buscarResultadoSessao(1);
+
+        //then
+        then(sessaoService).should().buscarResultadoSessao(any(Integer.class));
+        assertThat(responseDTO.getStatus()).isEqualTo(StatusResposta.SUCESSO);
+        assertThat(responseDTO.getMensagem()).isEqualTo("Resultado consultado com sucesso");
+        assertThat(responseDTO.getData()).isNotNull();
+
+    }
+
+    @DisplayName("Teste buscar resultado sessão inválida")
+    @Test
+    void buscarResultadoSessaoInvalido() {
+        //given
+        doThrow(RuntimeException.class).when(sessaoService).buscarResultadoSessao(any(Integer.class));
+
+        //when
+        ResponseDTO<ResultadoSessaoDTO> responseDTO = sessaoController.buscarResultadoSessao(1);
+
+        //then
+        then(sessaoService).should().buscarResultadoSessao(any(Integer.class));
         assertThat(responseDTO.getStatus()).isEqualTo(StatusResposta.ERRO);
     }
 }
