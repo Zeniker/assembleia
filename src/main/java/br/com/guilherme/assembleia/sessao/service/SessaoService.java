@@ -1,8 +1,8 @@
 package br.com.guilherme.assembleia.sessao.service;
 
-import br.com.guilherme.assembleia.pauta.model.Pauta;
 import br.com.guilherme.assembleia.pauta.service.PautaService;
 import br.com.guilherme.assembleia.sessao.dto.AbrirSessaoDTO;
+import br.com.guilherme.assembleia.sessao.exceptions.SessaoNaoEncontradaException;
 import br.com.guilherme.assembleia.sessao.model.Sessao;
 import br.com.guilherme.assembleia.sessao.repository.SessaoRepository;
 import org.springframework.stereotype.Service;
@@ -26,5 +26,9 @@ public class SessaoService {
         sessao.setSessaoAberta(true);
 
         return sessaoRepository.save(sessao);
+    }
+
+    public Sessao buscarSessaoPorId(Integer id) {
+        return sessaoRepository.findById(id).orElseThrow(SessaoNaoEncontradaException::new);
     }
 }
