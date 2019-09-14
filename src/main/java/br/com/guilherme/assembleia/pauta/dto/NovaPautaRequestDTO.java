@@ -1,7 +1,12 @@
 package br.com.guilherme.assembleia.pauta.dto;
 
-public class NovaPautaDTO {
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
+public class NovaPautaRequestDTO {
+
+    @NotNull
+    @NotEmpty
     private String assunto;
 
     public String getAssunto() {

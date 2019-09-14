@@ -1,6 +1,6 @@
 package br.com.guilherme.assembleia.pauta.service;
 
-import br.com.guilherme.assembleia.pauta.dto.NovaPautaDTO;
+import br.com.guilherme.assembleia.pauta.dto.NovaPautaRequestDTO;
 import br.com.guilherme.assembleia.pauta.exceptions.PautaNaoEncontradaException;
 import br.com.guilherme.assembleia.pauta.model.Pauta;
 import br.com.guilherme.assembleia.pauta.repository.PautaRepository;
@@ -48,7 +48,7 @@ public class PautaServiceTest {
         given(pautaRepository.save(captor.capture())).willReturn(pauta);
 
         //when
-        NovaPautaDTO novaPautaDTO = new NovaPautaDTO();
+        NovaPautaRequestDTO novaPautaDTO = new NovaPautaRequestDTO();
         novaPautaDTO.setAssunto("Assunto");
 
         Pauta pautaSalva = pautaService.criarPauta(novaPautaDTO);
