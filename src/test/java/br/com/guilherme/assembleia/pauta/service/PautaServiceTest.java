@@ -1,6 +1,7 @@
 package br.com.guilherme.assembleia.pauta.service;
 
 import br.com.guilherme.assembleia.pauta.dto.NovaPautaDTO;
+import br.com.guilherme.assembleia.pauta.exceptions.PautaNaoEncontradaException;
 import br.com.guilherme.assembleia.pauta.model.Pauta;
 import br.com.guilherme.assembleia.pauta.repository.PautaRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -16,6 +17,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.BDDMockito.then;
@@ -75,13 +77,12 @@ public class PautaServiceTest {
     @Test
     void buscarPautaPorIdInvalido() {
         //given
-        given(pautaRepository.findById(1)).willReturn(Optional.empty());
+        given(pautaRepository.findById(any())).willReturn(Optional.empty());
 
         //when
-        Pauta pautaEncontrada = pautaService.buscarPautaPorId(1);
+        assertThrows(PautaNaoEncontradaException.class, () -> pautaService.buscarPautaPorId(1));
 
         //then
-        then(pautaRepository).should().findById(any(Integer.class));
-        assertThat(pautaEncontrada).isNull();
+        then(pautaRepository).should().findById(any());
     }
 }

@@ -1,6 +1,7 @@
 package br.com.guilherme.assembleia.pauta.service;
 
 import br.com.guilherme.assembleia.pauta.dto.NovaPautaDTO;
+import br.com.guilherme.assembleia.pauta.exceptions.PautaNaoEncontradaException;
 import br.com.guilherme.assembleia.pauta.model.Pauta;
 import br.com.guilherme.assembleia.pauta.repository.PautaRepository;
 import org.springframework.stereotype.Service;
@@ -22,6 +23,6 @@ public class PautaService {
     }
 
     public Pauta buscarPautaPorId(Integer id) {
-        return pautaRepository.findById(id).orElse(null);
+        return pautaRepository.findById(id).orElseThrow(PautaNaoEncontradaException::new);
     }
 }
