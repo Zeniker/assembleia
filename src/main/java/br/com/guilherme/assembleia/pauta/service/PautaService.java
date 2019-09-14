@@ -20,4 +20,8 @@ public class PautaService {
 
         return pautaRepository.save(pauta);
     }
+
+    public Pauta buscarPautaPorId(Integer id) {
+        return pautaRepository.findById(id).orElse(null);
+    }
 }
