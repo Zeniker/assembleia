@@ -16,13 +16,16 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.time.Duration;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTimeoutPreemptively;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.BDDMockito.then;
+import static org.mockito.Mockito.times;
 
 @ExtendWith(MockitoExtension.class)
 class SessaoServiceTest {
@@ -40,21 +43,26 @@ class SessaoServiceTest {
     private ArgumentCaptor<Sessao> captor;
 
     private Sessao sessao;
+    private AbrirSessaoDTO abrirSessaoDTO;
+    private Pauta pauta;
 
     @BeforeEach
     void setUp() {
         sessao = new Sessao();
+        sessao.setId(1);
+        sessao.setSessaoAberta(true);
+
+        abrirSessaoDTO = new AbrirSessaoDTO();
+        abrirSessaoDTO.setPauta(1);
+
+        pauta = new Pauta();
+        pauta.setId(1);
     }
 
     @DisplayName("Teste abrir sessão")
     @Test
     void abrirSessao() {
         //given
-        Pauta pauta = new Pauta();
-        pauta.setId(1);
-
-        AbrirSessaoDTO abrirSessaoDTO = new AbrirSessaoDTO();
-        abrirSessaoDTO.setPauta(1);
         given(sessaoRepository.save(captor.capture())).willReturn(sessao);
         given(pautaService.buscarPautaPorId(any(Integer.class))).willReturn(pauta);
 
@@ -96,21 +104,28 @@ class SessaoServiceTest {
         then(sessaoRepository).should().findById(1);
     }
 
+    @DisplayName("Teste fechamento sessão")
     @Test
     void fecharSessao() {
         //given
-        sessao.setId(1);
-        sessao.setSessaoAberta(true);
-        given(sessaoRepository.findById(any(Integer.class))).willReturn(Optional.of(sessao));
+        abrirSessaoDTO.setDuracaoSessao(2);
+
+        given(pautaService.buscarPautaPorId(any(Integer.class))).willReturn(pauta);
         given(sessaoRepository.save(any())).willReturn(sessao);
+        given(sessaoRepository.findById(any())).willReturn(Optional.of(sessao));
 
         //when
-        sessaoService.fecharSessao(sessao.getId());
+        sessaoService.abrirSessao(abrirSessaoDTO);
 
         //then
-        then(sessaoRepository).should().findById(any(Integer.class));
-        then(sessaoRepository).should().save(any());
-        assertThat(sessao.isSessaoAberta()).isEqualTo(false);
+        assertTimeoutPreemptively(Duration.ofMillis(4000), () -> {
+            Thread.sleep(2000);
+
+            then(pautaService).should().buscarPautaPorId(any(Integer.class));
+            then(sessaoRepository).should().findById(any());
+            then(sessaoRepository).should(times(2)).save(any());
+            assertThat(sessao.isSessaoAberta()).isEqualTo(false);
+        });
 
     }
 }
