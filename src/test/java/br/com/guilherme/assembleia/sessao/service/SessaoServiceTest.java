@@ -95,4 +95,22 @@ class SessaoServiceTest {
         //then
         then(sessaoRepository).should().findById(1);
     }
+
+    @Test
+    void fecharSessao() {
+        //given
+        sessao.setId(1);
+        sessao.setSessaoAberta(true);
+        given(sessaoRepository.findById(any(Integer.class))).willReturn(Optional.of(sessao));
+        given(sessaoRepository.save(any())).willReturn(sessao);
+
+        //when
+        sessaoService.fecharSessao(sessao.getId());
+
+        //then
+        then(sessaoRepository).should().findById(any(Integer.class));
+        then(sessaoRepository).should().save(any());
+        assertThat(sessao.isSessaoAberta()).isEqualTo(false);
+
+    }
 }

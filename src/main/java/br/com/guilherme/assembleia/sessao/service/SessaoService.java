@@ -31,4 +31,10 @@ public class SessaoService {
     public Sessao buscarSessaoPorId(Integer id) {
         return sessaoRepository.findById(id).orElseThrow(SessaoNaoEncontradaException::new);
     }
+
+    public void fecharSessao(Integer idSessao) {
+        Sessao sessao = this.buscarSessaoPorId(idSessao);
+        sessao.setSessaoAberta(false);
+        sessaoRepository.save(sessao);
+    }
 }
