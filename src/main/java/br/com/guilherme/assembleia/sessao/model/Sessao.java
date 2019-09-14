@@ -3,10 +3,7 @@ package br.com.guilherme.assembleia.sessao.model;
 import br.com.guilherme.assembleia.pauta.model.Pauta;
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -17,7 +14,7 @@ public class Sessao {
     @Id
     private Integer id;
 
-    @OneToOne
+    @ManyToOne
     @NotNull
     private Pauta pauta;
 

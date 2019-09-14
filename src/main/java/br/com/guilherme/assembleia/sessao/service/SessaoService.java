@@ -1,7 +1,7 @@
 package br.com.guilherme.assembleia.sessao.service;
 
 import br.com.guilherme.assembleia.pauta.service.PautaService;
-import br.com.guilherme.assembleia.sessao.dto.AbrirSessaoDTO;
+import br.com.guilherme.assembleia.sessao.dto.AbrirSessaoRequestDTO;
 import br.com.guilherme.assembleia.sessao.dto.ResultadoSessaoDTO;
 import br.com.guilherme.assembleia.sessao.exceptions.SessaoNaoEncontradaException;
 import br.com.guilherme.assembleia.sessao.model.Sessao;
@@ -33,7 +33,7 @@ public class SessaoService {
     }
 
 
-    public Sessao abrirSessao(AbrirSessaoDTO abrirSessaoDTO) {
+    public Sessao abrirSessao(AbrirSessaoRequestDTO abrirSessaoDTO) {
         Sessao sessao = new Sessao();
         sessao.setPauta(pautaService.buscarPautaPorId(abrirSessaoDTO.getPauta()));
         sessao.setSessaoAberta(true);

@@ -2,7 +2,7 @@ package br.com.guilherme.assembleia.sessao.service;
 
 import br.com.guilherme.assembleia.pauta.model.Pauta;
 import br.com.guilherme.assembleia.pauta.service.PautaService;
-import br.com.guilherme.assembleia.sessao.dto.AbrirSessaoDTO;
+import br.com.guilherme.assembleia.sessao.dto.AbrirSessaoRequestDTO;
 import br.com.guilherme.assembleia.sessao.dto.ResultadoSessaoDTO;
 import br.com.guilherme.assembleia.sessao.exceptions.SessaoNaoEncontradaException;
 import br.com.guilherme.assembleia.sessao.model.Sessao;
@@ -53,7 +53,7 @@ class SessaoServiceTest {
     private ArgumentCaptor<Sessao> captor;
 
     private Sessao sessao;
-    private AbrirSessaoDTO abrirSessaoDTO;
+    private AbrirSessaoRequestDTO abrirSessaoDTO;
     private Pauta pauta;
     private Voto votoContra;
     private Voto votoAFavor;
@@ -64,7 +64,7 @@ class SessaoServiceTest {
         sessao.setId(1);
         sessao.setSessaoAberta(true);
 
-        abrirSessaoDTO = new AbrirSessaoDTO();
+        abrirSessaoDTO = new AbrirSessaoRequestDTO();
         abrirSessaoDTO.setPauta(1);
 
         pauta = new Pauta();

@@ -1,9 +1,16 @@
 package br.com.guilherme.assembleia.sessao.dto;
 
-public class AbrirSessaoDTO {
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 
+public class AbrirSessaoRequestDTO {
+
+    @NotNull
     private Integer pauta;
 
+    @NotNull
+    @Min(1)
     private Integer duracaoSessao;
 
     public Integer getPauta() {
