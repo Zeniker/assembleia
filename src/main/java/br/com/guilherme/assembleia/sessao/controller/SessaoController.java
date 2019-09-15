@@ -31,7 +31,7 @@ public class SessaoController {
      * @param requestDTO Objeto com as informações que serão utilizadas na sessão
      * @return DTO com mensagem de sucessso e os dados da nova sessão, ou em caso de erro, uma mensagem de erro
      */
-    @PostMapping("abrir")
+    @PostMapping
     public ResponseDTO<AbrirSessaoResponseDTO> abrirSessao(@RequestBody @Valid AbrirSessaoRequestDTO requestDTO){
         ResponseDTO<AbrirSessaoResponseDTO> response;
 
