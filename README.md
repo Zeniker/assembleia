@@ -31,3 +31,9 @@ necessárias e iniciar a aplicação na sequência.
 ```
 docker-compose up
 ```
+
+### Documentação API
+
+A API foi documentada utilizando os padrões de OpenAPI. O arquivo está na raiz, com o nome de documentacao_openapi.yaml.
+Para visualizá-lo de maneira mais amigável, pode utilizar o site https://openapi.design, carregar o arquivo nele e 
+selecionar a visão "Rich Preview".
