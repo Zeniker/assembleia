@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 
 /**
- * Controller para expôr as funcionalidades da pauta
+ * Controller para expor as funcionalidades da pauta
  *
  * @author Guilherme Lacerda
  */
