@@ -1,5 +1,10 @@
 package br.com.guilherme.assembleia.pauta.dto;
 
+/**
+ * DTO de response da criação de uma nova pauta
+ *
+ * @author Guilherme Lacerda
+ */
 public class NovaPautaResponseDTO {
 
     private Integer id;

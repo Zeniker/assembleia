@@ -6,6 +6,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+/**
+ * Classe modelo para a tabela Pauta no banco de dados
+ *
+ * @author Guilherme Lacerda
+ */
 @Entity
 public class Pauta {
 

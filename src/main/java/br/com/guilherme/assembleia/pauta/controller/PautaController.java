@@ -12,6 +12,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 
+/**
+ * Controller para expôr as funcionalidades da pauta
+ *
+ * @author Guilherme Lacerda
+ */
 @RestController
 @RequestMapping("pauta")
 public class PautaController {
@@ -22,6 +27,12 @@ public class PautaController {
         this.pautaService = pautaService;
     }
 
+    /**
+     * Permite a criação de uma nova pauta
+     *
+     * @param requestDTO Objeto com as informações que serão utilizadas na pauta
+     * @return DTO com mensagem de sucessso e os dados da nova pauta, ou em caso de erro, uma mensagem de erro
+     */
     @PostMapping
     public ResponseDTO<NovaPautaResponseDTO> criarPauta(@RequestBody @Valid NovaPautaRequestDTO requestDTO){
         ResponseDTO<NovaPautaResponseDTO> response;
