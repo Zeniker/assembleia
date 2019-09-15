@@ -15,13 +15,15 @@ import java.util.Optional;
  */
 public interface VotoRepository extends JpaRepository<Voto, Integer> {
 
+
     /**
      * Busca o voto pertencente a um associado na sessão
      *
      * @param cpfAssociado Cpf do associado que votou
+     * @param sessao Sessão para buscar o voto
      * @return Optional do voto
      */
-    Optional<Voto> findByCpfAssociado(String cpfAssociado);
+    Optional<Voto> findByCpfAssociadoAndSessao(String cpfAssociado, Sessao sessao);
 
     /**
      * Lista os votos encontrados em uma sessão

@@ -73,7 +73,7 @@ class VotoServiceTest {
 
         //then
         then(votoRepository).should().save(any(Voto.class));
-        then(votoRepository).should().findByCpfAssociado(anyString());
+        then(votoRepository).should().findByCpfAssociadoAndSessao(anyString(), any(Sessao.class));
         then(sessaoService).should().buscarSessaoPorId(1);
         assertThat(votoRegistrado).isNotNull();
         assertThat(captor.getValue().getCpfAssociado()).isEqualTo("72332314431");
@@ -100,14 +100,14 @@ class VotoServiceTest {
         //given
         sessao.setSessaoAberta(true);
         given(sessaoService.buscarSessaoPorId(any())).willReturn(sessao);
-        given(votoRepository.findByCpfAssociado(anyString())).willReturn(Optional.of(new Voto()));
+        given(votoRepository.findByCpfAssociadoAndSessao(anyString(), any(Sessao.class))).willReturn(Optional.of(new Voto()));
 
         //when
         assertThrows(AssociadoJaVotouException.class, () -> votoService.registrarVoto(registrarVotoDTO));
 
         //then
         then(sessaoService).should().buscarSessaoPorId(1);
-        then(votoRepository).should().findByCpfAssociado(anyString());
+        then(votoRepository).should().findByCpfAssociadoAndSessao(anyString(), any(Sessao.class));
     }
 
     @DisplayName("Buscar votos registrados para uma sessão")

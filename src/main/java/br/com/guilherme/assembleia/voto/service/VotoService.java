@@ -50,7 +50,8 @@ public class VotoService {
     private void validaVotacao(Sessao sessao, String cpfAssociado){
         if(!sessao.isSessaoAberta()) throw new SessaoFechadaException();
 
-        if(votoRepository.findByCpfAssociado(cpfAssociado).isPresent()) throw new AssociadoJaVotouException();
+        if(votoRepository.findByCpfAssociadoAndSessao(cpfAssociado, sessao).isPresent())
+            throw new AssociadoJaVotouException();
     }
 
 
