@@ -1,0 +1,30 @@
+version: '3'
+services:
+  database:
+    image: postgres:12-alpine
+    container_name: assembleia-db
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: usuario
+      POSTGRES_PASSWORD: senha
+      POSTGRES_DB: assembleia
+    networks:
+      - rede
+  app:
+    image: maven:3.6.2-jdk-8-slim
+    container_name: assembleia-app
+    ports:
+      - "8080:8080"
+    volumes:
+      - "./:/etc/projeto"
+      - "$HOME/.m2:/root/.m2"
+    working_dir: /etc/projeto
+    command: ["mvn", "clean", "install", "spring-boot:run"]
+    depends_on:
+      - database
+    networks:
+      - rede
+networks:
+    rede:
+        driver: bridge
