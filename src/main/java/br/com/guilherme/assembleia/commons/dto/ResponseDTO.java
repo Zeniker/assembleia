@@ -1,5 +1,12 @@
 package br.com.guilherme.assembleia.commons.dto;
 
+/**
+ * DTO de response padrão da API
+ *
+ * @param <T> Classe de dados do dto
+ *
+ * @author Guilherme Lacerda
+ */
 public class ResponseDTO<T> {
 
     private StatusResposta status;
