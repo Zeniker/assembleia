@@ -1,5 +1,10 @@
 package br.com.guilherme.assembleia.voto.exception;
 
+/**
+ * Exceção para ser utilizada quando o associado já tem voto registrado na sessão.
+ *
+ * @author Guilherme Lacerda
+ */
 public class AssociadoJaVotouException extends RuntimeException {
 
     public AssociadoJaVotouException() {

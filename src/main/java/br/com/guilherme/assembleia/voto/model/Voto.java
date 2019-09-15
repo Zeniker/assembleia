@@ -9,6 +9,11 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
+/**
+ * Classe modelo para a tabela Voto no banco de dados
+ *
+ * @author Guilherme Lacerda
+ */
 @Entity
 public class Voto {
 

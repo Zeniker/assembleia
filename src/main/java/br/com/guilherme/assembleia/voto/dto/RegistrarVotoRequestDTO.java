@@ -4,6 +4,11 @@ import br.com.guilherme.assembleia.voto.model.VotoEscolha;
 
 import javax.validation.constraints.NotNull;
 
+/**
+ * DTO de request para registro de voto
+ *
+ * @author Guilherme Lacerda
+ */
 public class RegistrarVotoRequestDTO {
 
     @NotNull

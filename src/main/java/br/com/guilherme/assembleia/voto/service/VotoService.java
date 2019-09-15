@@ -11,6 +11,11 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * Classe de serviço com as funções de voto
+ *
+ * @author Guilherme Lacerda
+ */
 @Service
 public class VotoService {
 
@@ -23,6 +28,12 @@ public class VotoService {
         this.sessaoService = sessaoService;
     }
 
+    /**
+     * Registra um novo voto para uma sessão em aberto
+     *
+     * @param registrarVotoDTO Objeto com as informações que serão utilizadas no voto
+     * @return Voto registrado
+     */
     public Voto registrarVoto(RegistrarVotoRequestDTO registrarVotoDTO) {
         Sessao sessao = sessaoService.buscarSessaoPorId(registrarVotoDTO.getSessaoVotada());
 
@@ -43,6 +54,12 @@ public class VotoService {
     }
 
 
+    /**
+     * Busca os votos realizados em uma sessão
+     *
+     * @param idSessao Utilizado para encontrar a sessão dos votos
+     * @return Lista de votos encontrados
+     */
     public List<Voto> buscarVotosDaSessao(Integer idSessao) {
         Sessao sessao = sessaoService.buscarSessaoPorId(idSessao);
 
