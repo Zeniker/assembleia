@@ -21,6 +21,7 @@ as entidades sejam criadas ao iniciar a aplicação.
 - Postgres: Banco de dados open-source, além de possuir uma imagem mais leve no docker.
 - H2: Banco em memórias utilizado nos testes da aplicação.
 - Spring Boot Maven Plugin: Utilizado para subir a aplicação através do maven.
+- Apache Http: Utilizado devido à facilidade de realizar requisições através de sua api.
 
 ### Execução
 
