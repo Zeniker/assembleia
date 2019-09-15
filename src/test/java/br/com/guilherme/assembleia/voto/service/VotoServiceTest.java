@@ -3,8 +3,10 @@ package br.com.guilherme.assembleia.voto.service;
 import br.com.guilherme.assembleia.sessao.exceptions.SessaoFechadaException;
 import br.com.guilherme.assembleia.sessao.model.Sessao;
 import br.com.guilherme.assembleia.sessao.service.SessaoService;
+import br.com.guilherme.assembleia.voto.dto.CPFStatusDTO;
 import br.com.guilherme.assembleia.voto.dto.RegistrarVotoRequestDTO;
 import br.com.guilherme.assembleia.voto.exception.AssociadoJaVotouException;
+import br.com.guilherme.assembleia.voto.exception.AssociadoNaoElegivelException;
 import br.com.guilherme.assembleia.voto.model.Voto;
 import br.com.guilherme.assembleia.voto.model.VotoEscolha;
 import br.com.guilherme.assembleia.voto.repository.VotoRepository;
@@ -38,6 +40,9 @@ class VotoServiceTest {
     @Mock
     private SessaoService sessaoService;
 
+    @Mock
+    private ElegibilidadeVoto elegibilidadeVoto;
+
     @InjectMocks
     private VotoService votoService;
 
@@ -65,8 +70,12 @@ class VotoServiceTest {
         Voto voto = new Voto();
         sessao.setSessaoAberta(true);
 
+        CPFStatusDTO cpfStatusDTO = new CPFStatusDTO();
+        cpfStatusDTO.setStatus("ABLE_TO_VOTE");
+
         given(votoRepository.save(captor.capture())).willReturn(voto);
         given(sessaoService.buscarSessaoPorId(any())).willReturn(sessao);
+        given(elegibilidadeVoto.associadoPodeVotar(anyString())).willReturn(cpfStatusDTO);
 
         //when
         Voto votoRegistrado = votoService.registrarVoto(registrarVotoDTO);
@@ -108,6 +117,22 @@ class VotoServiceTest {
         //then
         then(sessaoService).should().buscarSessaoPorId(1);
         then(votoRepository).should().findByCpfAssociadoAndSessao(anyString(), any(Sessao.class));
+    }
+
+    @DisplayName("Teste registro voto de cpf não elegível")
+    @Test
+    void registrarVotoCPFInvalido() {
+        //given
+        sessao.setSessaoAberta(true);
+        given(sessaoService.buscarSessaoPorId(any())).willReturn(sessao);
+        given(elegibilidadeVoto.associadoPodeVotar(anyString())).willReturn(new CPFStatusDTO());
+
+        //when
+        assertThrows(AssociadoNaoElegivelException.class, () -> votoService.registrarVoto(registrarVotoDTO));
+
+        //then
+        then(sessaoService).should().buscarSessaoPorId(1);
+        then(elegibilidadeVoto).should().associadoPodeVotar(anyString());
     }
 
     @DisplayName("Buscar votos registrados para uma sessão")

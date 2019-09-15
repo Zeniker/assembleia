@@ -76,6 +76,14 @@
 			<artifactId>mockito-junit-jupiter</artifactId>
 		</dependency>
 
+		<!-- Requisições Externas-->
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.5.10</version>
+		</dependency>
+
+
 
 	</dependencies>
 

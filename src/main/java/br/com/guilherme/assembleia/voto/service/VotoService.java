@@ -3,8 +3,10 @@ package br.com.guilherme.assembleia.voto.service;
 import br.com.guilherme.assembleia.sessao.exceptions.SessaoFechadaException;
 import br.com.guilherme.assembleia.sessao.model.Sessao;
 import br.com.guilherme.assembleia.sessao.service.SessaoService;
+import br.com.guilherme.assembleia.voto.dto.CPFStatusDTO;
 import br.com.guilherme.assembleia.voto.dto.RegistrarVotoRequestDTO;
 import br.com.guilherme.assembleia.voto.exception.AssociadoJaVotouException;
+import br.com.guilherme.assembleia.voto.exception.AssociadoNaoElegivelException;
 import br.com.guilherme.assembleia.voto.model.Voto;
 import br.com.guilherme.assembleia.voto.repository.VotoRepository;
 import org.springframework.stereotype.Service;
@@ -23,9 +25,12 @@ public class VotoService {
 
     private SessaoService sessaoService;
 
-    public VotoService(VotoRepository votoRepository, SessaoService sessaoService) {
+    private ElegibilidadeVoto elegibilidadeVoto;
+
+    public VotoService(VotoRepository votoRepository, SessaoService sessaoService, ElegibilidadeVoto elegibilidadeVoto) {
         this.votoRepository = votoRepository;
         this.sessaoService = sessaoService;
+        this.elegibilidadeVoto = elegibilidadeVoto;
     }
 
     /**
@@ -52,6 +57,11 @@ public class VotoService {
 
         if(votoRepository.findByCpfAssociadoAndSessao(cpfAssociado, sessao).isPresent())
             throw new AssociadoJaVotouException();
+
+        CPFStatusDTO statusDTO = elegibilidadeVoto.associadoPodeVotar(cpfAssociado);
+
+        if(!"ABLE_TO_VOTE".equals(statusDTO.getStatus()))
+            throw new AssociadoNaoElegivelException();
     }
 
 
