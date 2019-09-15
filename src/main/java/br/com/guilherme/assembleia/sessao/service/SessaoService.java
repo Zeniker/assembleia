@@ -18,6 +18,11 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.stream.Collectors;
 
+/**
+ * Classe de serviço com as funções de sessão
+ *
+ * @author Guilherme Lacerda
+ */
 @Service
 public class SessaoService {
 
@@ -34,6 +39,12 @@ public class SessaoService {
     }
 
 
+    /**
+     * Abre uma nova sessão de votação no sistema
+     *
+     * @param abrirSessaoDTO Objeto com as informações que serão utilizadas na sessão
+     * @return Sessão aberta
+     */
     public Sessao abrirSessao(AbrirSessaoRequestDTO abrirSessaoDTO) {
         Sessao sessao = new Sessao();
         sessao.setPauta(pautaService.buscarPautaPorId(abrirSessaoDTO.getPauta()));
@@ -48,6 +59,12 @@ public class SessaoService {
         return sessao;
     }
 
+    /**
+     * Busca uma sessão a partir de um id
+     *
+     * @param id Utilizado para encontrar a sessão
+     * @return Sessão encontrada
+     */
     public Sessao buscarSessaoPorId(Integer id) {
         return sessaoRepository.findById(id).orElseThrow(SessaoNaoEncontradaException::new);
     }
@@ -59,12 +76,23 @@ public class SessaoService {
         timer.schedule(tarefaFechamento, segundosParaFechar * 1000);
     }
 
+    /**
+     * Fecha uma sessão, encerramento as votações para a mesma
+     *
+     * @param idSessao Utilizado para encontrar a sessão e fechá-la
+     */
     public void fecharSessao(Integer idSessao) {
         Sessao sessao = this.buscarSessaoPorId(idSessao);
         sessao.setSessaoAberta(false);
         sessaoRepository.save(sessao);
     }
 
+    /**
+     * Busca o resultado de uma sessão fechada
+     *
+     * @param id Utilizado para encontrar a sessão e seus dados
+     * @return Objeto com a contabilização de votos da sessão e sua situação
+     */
     public ResultadoSessaoDTO buscarResultadoSessao(Integer id) {
         Sessao sessao = buscarSessaoPorId(id);
         if (sessao.isSessaoAberta()) throw new SessaoAbertaException();

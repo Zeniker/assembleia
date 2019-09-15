@@ -6,6 +6,11 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
+/**
+ * Classe modelo para a tabela Sessao no banco de dados
+ *
+ * @author Guilherme Lacerda
+ */
 @Entity
 public class Sessao {
 

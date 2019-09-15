@@ -2,6 +2,11 @@ package br.com.guilherme.assembleia.sessao.service;
 
 import java.util.TimerTask;
 
+/**
+ * Task utilizada para encerrar uma sessão
+ *
+ * @author Guilherme Lacerda
+ */
 public class EncerramentoSessaoTask extends TimerTask {
 
     private final SessaoService sessaoService;

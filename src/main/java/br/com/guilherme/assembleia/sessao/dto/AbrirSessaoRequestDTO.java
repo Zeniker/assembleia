@@ -2,6 +2,11 @@ package br.com.guilherme.assembleia.sessao.dto;
 
 import javax.validation.constraints.NotNull;
 
+/**
+ * DTO de request de abertura de uma sessão
+ *
+ * @author Guilherme Lacerda
+ */
 public class AbrirSessaoRequestDTO {
 
     @NotNull

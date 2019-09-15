@@ -2,6 +2,11 @@ package br.com.guilherme.assembleia.sessao.dto;
 
 import br.com.guilherme.assembleia.sessao.model.SituacaoVotacao;
 
+/**
+ * DTO com o resultado de uma sessão
+ *
+ * @author Guilherme Lacerda
+ */
 public class ResultadoSessaoDTO {
 
     private Integer totalVotos;
