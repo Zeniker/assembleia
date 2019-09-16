@@ -58,10 +58,10 @@ public class VotoService {
         if(votoRepository.findByCpfAssociadoAndSessao(cpfAssociado, sessao).isPresent())
             throw new AssociadoJaVotouException();
 
-//        CPFStatusDTO statusDTO = elegibilidadeVoto.associadoPodeVotar(cpfAssociado);
-//
-//        if(!"ABLE_TO_VOTE".equals(statusDTO.getStatus()))
-//            throw new AssociadoNaoElegivelException();
+        CPFStatusDTO statusDTO = elegibilidadeVoto.associadoPodeVotar(cpfAssociado);
+
+        if(!"ABLE_TO_VOTE".equals(statusDTO.getStatus()))
+            throw new AssociadoNaoElegivelException();
     }
 
 
