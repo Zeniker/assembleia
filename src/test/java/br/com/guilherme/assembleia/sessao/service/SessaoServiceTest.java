@@ -128,24 +128,16 @@ class SessaoServiceTest {
     @Test
     void fecharSessao() {
         //given
-        abrirSessaoDTO.setDuracaoSessao(2);
-
-        given(pautaService.buscarPautaPorId(any(Integer.class))).willReturn(pauta);
         given(sessaoRepository.save(any())).willReturn(sessao);
         given(sessaoRepository.findById(any())).willReturn(Optional.of(sessao));
 
         //when
-        sessaoService.abrirSessao(abrirSessaoDTO);
+        sessaoService.fecharSessao(1);
 
         //then
-        assertTimeoutPreemptively(Duration.ofMillis(4000), () -> {
-            Thread.sleep(2000);
-
-            then(pautaService).should().buscarPautaPorId(any(Integer.class));
-            then(sessaoRepository).should().findById(any());
-            then(sessaoRepository).should(times(2)).save(any());
-            assertThat(sessao.isSessaoAberta()).isEqualTo(false);
-        });
+        then(sessaoRepository).should().findById(any());
+        then(sessaoRepository).should().save(any());
+        assertThat(sessao.isSessaoAberta()).isEqualTo(false);
     }
 
     @DisplayName("Teste busca resultado sessão inválida")
