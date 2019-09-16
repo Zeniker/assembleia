@@ -20,6 +20,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -68,13 +69,14 @@ class VotoServiceTest {
     void registrarVoto() {
         //given
         Voto voto = new Voto();
-        sessao.setSessaoAberta(true);
+        sessao.setDataHoraFechamento(LocalDateTime.now().plusDays(1));
 
         CPFStatusDTO cpfStatusDTO = new CPFStatusDTO();
         cpfStatusDTO.setStatus("ABLE_TO_VOTE");
 
         given(votoRepository.save(captor.capture())).willReturn(voto);
         given(sessaoService.buscarSessaoPorId(any())).willReturn(sessao);
+        given(sessaoService.isSessaoAberta(any())).willReturn(true);
         given(elegibilidadeVoto.associadoPodeVotar(anyString())).willReturn(cpfStatusDTO);
 
         //when
@@ -84,6 +86,7 @@ class VotoServiceTest {
         then(votoRepository).should().save(any(Voto.class));
         then(votoRepository).should().findByCpfAssociadoAndSessao(anyString(), any(Sessao.class));
         then(sessaoService).should().buscarSessaoPorId(1);
+        then(sessaoService).should().isSessaoAberta(any());
         assertThat(votoRegistrado).isNotNull();
         assertThat(captor.getValue().getCpfAssociado()).isEqualTo("72332314431");
         assertThat(captor.getValue().getEscolha()).isEqualTo(VotoEscolha.SIM);
@@ -94,12 +97,14 @@ class VotoServiceTest {
     @Test
     void registrarVotoSessaoFechada() {
         //given
+        given(sessaoService.isSessaoAberta(any())).willReturn(false);
         given(sessaoService.buscarSessaoPorId(any())).willReturn(sessao);
 
         //when
         assertThrows(SessaoFechadaException.class, () -> votoService.registrarVoto(registrarVotoDTO));
 
         //then
+        then(sessaoService).should().isSessaoAberta(any());
         then(sessaoService).should().buscarSessaoPorId(1);
     }
 
@@ -107,14 +112,16 @@ class VotoServiceTest {
     @Test
     void registrarVotoJaExistente() {
         //given
-        sessao.setSessaoAberta(true);
+        sessao.setDataHoraFechamento(LocalDateTime.now().plusDays(1));
         given(sessaoService.buscarSessaoPorId(any())).willReturn(sessao);
+        given(sessaoService.isSessaoAberta(any())).willReturn(true);
         given(votoRepository.findByCpfAssociadoAndSessao(anyString(), any(Sessao.class))).willReturn(Optional.of(new Voto()));
 
         //when
         assertThrows(AssociadoJaVotouException.class, () -> votoService.registrarVoto(registrarVotoDTO));
 
         //then
+        then(sessaoService).should().isSessaoAberta(any());
         then(sessaoService).should().buscarSessaoPorId(1);
         then(votoRepository).should().findByCpfAssociadoAndSessao(anyString(), any(Sessao.class));
     }
@@ -123,14 +130,16 @@ class VotoServiceTest {
     @Test
     void registrarVotoCPFInvalido() {
         //given
-        sessao.setSessaoAberta(true);
+        sessao.setDataHoraFechamento(LocalDateTime.now().plusDays(1));
         given(sessaoService.buscarSessaoPorId(any())).willReturn(sessao);
+        given(sessaoService.isSessaoAberta(any())).willReturn(true);
         given(elegibilidadeVoto.associadoPodeVotar(anyString())).willReturn(new CPFStatusDTO());
 
         //when
         assertThrows(AssociadoNaoElegivelException.class, () -> votoService.registrarVoto(registrarVotoDTO));
 
         //then
+        then(sessaoService).should().isSessaoAberta(any());
         then(sessaoService).should().buscarSessaoPorId(1);
         then(elegibilidadeVoto).should().associadoPodeVotar(anyString());
     }

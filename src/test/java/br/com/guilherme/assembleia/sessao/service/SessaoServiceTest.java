@@ -23,6 +23,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -63,7 +64,8 @@ class SessaoServiceTest {
     void setUp() {
         sessao = new Sessao();
         sessao.setId(1);
-        sessao.setSessaoAberta(true);
+        sessao.setDataHoraAbertura(LocalDateTime.now().minusSeconds(2));
+        sessao.setDataHoraFechamento(LocalDateTime.now());
 
         abrirSessaoDTO = new AbrirSessaoRequestDTO();
         abrirSessaoDTO.setPauta(1);
@@ -93,7 +95,11 @@ class SessaoServiceTest {
         then(sessaoRepository).should().save(any(Sessao.class));
         assertThat(sessaoAberta).isNotNull();
         assertThat(captor.getValue()).isNotNull();
-        assertThat(captor.getValue().isSessaoAberta()).isEqualTo(true);
+        assertThat(captor.getValue().getDataHoraAbertura()).isNotNull();
+        assertThat(captor.getValue().getDataHoraFechamento())
+                .isNotNull()
+                .isEqualTo(captor.getValue().getDataHoraAbertura().plusSeconds(60));
+
         assertThat(captor.getValue().getPauta().getId()).isEqualTo(1);
     }
 
@@ -124,28 +130,11 @@ class SessaoServiceTest {
         then(sessaoRepository).should().findById(1);
     }
 
-    @DisplayName("Teste fechamento sessão")
-    @Test
-    void fecharSessao() {
-        //given
-        given(sessaoRepository.save(any())).willReturn(sessao);
-        given(sessaoRepository.findById(any())).willReturn(Optional.of(sessao));
-
-        //when
-        sessaoService.fecharSessao(1);
-
-        //then
-        then(sessaoRepository).should().findById(any());
-        then(sessaoRepository).should().save(any());
-        assertThat(sessao.isSessaoAberta()).isEqualTo(false);
-    }
-
     @DisplayName("Teste busca resultado sessão inválida")
     @Test
     void buscarResultadoSessaoInvalida() {
         //given
-        sessao.setSessaoAberta(true);
-
+        sessao.setDataHoraFechamento(LocalDateTime.now().plusMinutes(1));
         given(sessaoRepository.findById(any())).willReturn(Optional.of(sessao));
 
         //when
@@ -153,15 +142,12 @@ class SessaoServiceTest {
 
         //then
         then(sessaoRepository).should().findById(any());
-
-
     }
 
     @DisplayName("Teste busca resultado sessão aprovada")
     @Test
     void buscarResultadoSessaoAprovada() {
         //given
-        sessao.setSessaoAberta(false);
         List<Voto> votoList = Arrays.asList(votoAFavor, votoContra, votoAFavor);
 
         given(sessaoRepository.findById(any())).willReturn(Optional.of(sessao));
@@ -181,7 +167,6 @@ class SessaoServiceTest {
     @Test
     void buscarResultadoSessaoReprovada() {
         //given
-        sessao.setSessaoAberta(false);
         List<Voto> votoList = Arrays.asList(votoAFavor, votoContra, votoContra);
 
         given(sessaoRepository.findById(any())).willReturn(Optional.of(sessao));
@@ -201,7 +186,6 @@ class SessaoServiceTest {
     @Test
     void buscarResultadoSessaoEmpatada() {
         //given
-        sessao.setSessaoAberta(false);
         List<Voto> votoList = Arrays.asList(votoAFavor, votoContra);
 
         given(sessaoRepository.findById(any())).willReturn(Optional.of(sessao));
@@ -215,5 +199,25 @@ class SessaoServiceTest {
         assertThat(resultadoSessao.getTotalVotosAFavor()).isEqualTo(1);
         assertThat(resultadoSessao.getTotalVotosContra()).isEqualTo(1);
         assertThat(resultadoSessao.getSituacao()).isEqualTo(SituacaoVotacao.EMPATE);
+    }
+
+    @DisplayName("Teste verifica estado sessão - Aberta")
+    @Test
+    void isSessaoAberta() {
+        sessao.setDataHoraFechamento(LocalDateTime.now().plusMinutes(1));
+
+        boolean isSessaoAberta = sessaoService.isSessaoAberta(sessao);
+
+        assertThat(isSessaoAberta).isEqualTo(true);
+    }
+
+    @DisplayName("Teste verifica estado sessão - Fechada")
+    @Test
+    void isSessaoAbertaFalse() {
+        sessao.setDataHoraFechamento(LocalDateTime.now());
+
+        boolean isSessaoAberta = sessaoService.isSessaoAberta(sessao);
+
+        assertThat(isSessaoAberta).isEqualTo(false);
     }
 }

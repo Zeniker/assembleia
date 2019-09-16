@@ -5,6 +5,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
 
 /**
  * Classe modelo para a tabela Sessao no banco de dados
@@ -24,7 +25,11 @@ public class Sessao {
     private Pauta pauta;
 
     @NotNull
-    private boolean sessaoAberta;
+    private LocalDateTime dataHoraAbertura;
+
+    @NotNull
+    private LocalDateTime dataHoraFechamento;
+
 
     public Integer getId() {
         return id;
@@ -42,11 +47,20 @@ public class Sessao {
         this.pauta = pauta;
     }
 
-    public boolean isSessaoAberta() {
-        return sessaoAberta;
+
+    public LocalDateTime getDataHoraAbertura() {
+        return dataHoraAbertura;
     }
 
-    public void setSessaoAberta(boolean sessaoAberta) {
-        this.sessaoAberta = sessaoAberta;
+    public void setDataHoraAbertura(LocalDateTime dataHoraAbertura) {
+        this.dataHoraAbertura = dataHoraAbertura;
+    }
+
+    public LocalDateTime getDataHoraFechamento() {
+        return dataHoraFechamento;
+    }
+
+    public void setDataHoraFechamento(LocalDateTime dataHoraFechamento) {
+        this.dataHoraFechamento = dataHoraFechamento;
     }
 }

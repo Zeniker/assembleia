@@ -13,9 +13,8 @@ import br.com.guilherme.assembleia.voto.model.VotoEscolha;
 import br.com.guilherme.assembleia.voto.repository.VotoRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 import java.util.stream.Collectors;
 
 /**
@@ -46,17 +45,22 @@ public class SessaoService {
      * @return Sessão aberta
      */
     public Sessao abrirSessao(AbrirSessaoRequestDTO abrirSessaoDTO) {
+        LocalDateTime dataHoraAbertura = LocalDateTime.now();
+
         Sessao sessao = new Sessao();
         sessao.setPauta(pautaService.buscarPautaPorId(abrirSessaoDTO.getPauta()));
-        sessao.setSessaoAberta(true);
+        sessao.setDataHoraAbertura(dataHoraAbertura);
+        sessao.setDataHoraFechamento(calculaDataHoraFechamento(dataHoraAbertura, abrirSessaoDTO.getDuracaoSessao()));
 
         sessao = sessaoRepository.save(sessao);
 
-        if(abrirSessaoDTO.getDuracaoSessao() == null) abrirSessaoDTO.setDuracaoSessao(60);
-
-        agendaFechamentoSessao(sessao, abrirSessaoDTO.getDuracaoSessao());
-
         return sessao;
+    }
+
+    private LocalDateTime calculaDataHoraFechamento(LocalDateTime dataHoraAbertura, Integer duracao){
+        if(duracao == null) duracao = 60;
+
+        return dataHoraAbertura.plusSeconds(duracao);
     }
 
     /**
@@ -69,22 +73,14 @@ public class SessaoService {
         return sessaoRepository.findById(id).orElseThrow(SessaoNaoEncontradaException::new);
     }
 
-    private void agendaFechamentoSessao(final Sessao sessao, Integer segundosParaFechar){
-        TimerTask tarefaFechamento = new EncerramentoSessaoTask(this, sessao.getId());
-
-        Timer timer = new Timer("Fechamento de Sessão");
-        timer.schedule(tarefaFechamento, segundosParaFechar * 1000);
-    }
-
     /**
-     * Fecha uma sessão, encerramento as votações para a mesma
+     * Valida se uma sessão ainda está aberta para votação
      *
-     * @param idSessao Utilizado para encontrar a sessão e fechá-la
+     * @param sessao Sessao para validar
+     * @return boolean informando se está aberta
      */
-    public void fecharSessao(Integer idSessao) {
-        Sessao sessao = this.buscarSessaoPorId(idSessao);
-        sessao.setSessaoAberta(false);
-        sessaoRepository.save(sessao);
+    public boolean isSessaoAberta(Sessao sessao){
+        return LocalDateTime.now().isBefore(sessao.getDataHoraFechamento());
     }
 
     /**
@@ -95,7 +91,7 @@ public class SessaoService {
      */
     public ResultadoSessaoDTO buscarResultadoSessao(Integer id) {
         Sessao sessao = buscarSessaoPorId(id);
-        if (sessao.isSessaoAberta()) throw new SessaoAbertaException();
+        if (isSessaoAberta(sessao)) throw new SessaoAbertaException();
 
         List<Voto> votos = votoRepository.findBySessao(sessao);
 

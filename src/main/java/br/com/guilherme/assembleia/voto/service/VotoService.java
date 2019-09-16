@@ -53,15 +53,15 @@ public class VotoService {
     }
 
     private void validaVotacao(Sessao sessao, String cpfAssociado){
-        if(!sessao.isSessaoAberta()) throw new SessaoFechadaException();
+        if(!sessaoService.isSessaoAberta(sessao)) throw new SessaoFechadaException();
 
         if(votoRepository.findByCpfAssociadoAndSessao(cpfAssociado, sessao).isPresent())
             throw new AssociadoJaVotouException();
 
-        CPFStatusDTO statusDTO = elegibilidadeVoto.associadoPodeVotar(cpfAssociado);
-
-        if(!"ABLE_TO_VOTE".equals(statusDTO.getStatus()))
-            throw new AssociadoNaoElegivelException();
+//        CPFStatusDTO statusDTO = elegibilidadeVoto.associadoPodeVotar(cpfAssociado);
+//
+//        if(!"ABLE_TO_VOTE".equals(statusDTO.getStatus()))
+//            throw new AssociadoNaoElegivelException();
     }
 
 
