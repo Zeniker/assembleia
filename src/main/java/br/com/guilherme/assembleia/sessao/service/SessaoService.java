@@ -111,7 +111,8 @@ public class SessaoService {
         ResultadoSessaoDTO resultado = new ResultadoSessaoDTO();
         resultado.setTotalVotos(votos.size());
         resultado.setSituacao(SituacaoVotacao.getSituacao(totalAFavor, totalContra));
-
+        resultado.setTotalVotosAFavor(totalAFavor);
+        resultado.setTotalVotosContra(totalContra);
 
         return resultado;
     }
