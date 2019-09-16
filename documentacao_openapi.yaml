@@ -177,6 +177,8 @@ paths:
                 properties:
                   totalVotos: {x-oad-type: integer, type: integer, description: 'Total de votos que foram registrados na sessão.', format: int32}
                   situacao: {x-oad-type: string, type: string, description: 'Situação da sessão.', enum: [APROVADA, REPROVADA, EMPATE]}
+                  totalVotosAFavor: {x-oad-type: integer, type: integer, description: 'Total de votos a favor da pauta', format: int32}
+                  totalVotosContra: {x-oad-type: integer, type: integer, description: 'Total de votos contra a pauta', format: int32}
           x-oad-type: response
         '400':
           description: 'Caso os parâmetros estejam incorretos, a resposta receberá código 400.'

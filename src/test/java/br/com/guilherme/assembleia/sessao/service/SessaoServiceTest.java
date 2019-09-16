@@ -172,6 +172,8 @@ class SessaoServiceTest {
 
         //then
         assertThat(resultadoSessao.getTotalVotos()).isEqualTo(3);
+        assertThat(resultadoSessao.getTotalVotosAFavor()).isEqualTo(2);
+        assertThat(resultadoSessao.getTotalVotosContra()).isEqualTo(1);
         assertThat(resultadoSessao.getSituacao()).isEqualTo(SituacaoVotacao.APROVADA);
     }
 
@@ -190,6 +192,8 @@ class SessaoServiceTest {
 
         //then
         assertThat(resultadoSessao.getTotalVotos()).isEqualTo(3);
+        assertThat(resultadoSessao.getTotalVotosAFavor()).isEqualTo(1);
+        assertThat(resultadoSessao.getTotalVotosContra()).isEqualTo(2);
         assertThat(resultadoSessao.getSituacao()).isEqualTo(SituacaoVotacao.REPROVADA);
     }
 
@@ -208,6 +212,8 @@ class SessaoServiceTest {
 
         //then
         assertThat(resultadoSessao.getTotalVotos()).isEqualTo(2);
+        assertThat(resultadoSessao.getTotalVotosAFavor()).isEqualTo(1);
+        assertThat(resultadoSessao.getTotalVotosContra()).isEqualTo(1);
         assertThat(resultadoSessao.getSituacao()).isEqualTo(SituacaoVotacao.EMPATE);
     }
 }

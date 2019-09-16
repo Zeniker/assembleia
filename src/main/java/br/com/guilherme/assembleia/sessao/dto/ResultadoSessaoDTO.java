@@ -10,6 +10,8 @@ import br.com.guilherme.assembleia.sessao.model.SituacaoVotacao;
 public class ResultadoSessaoDTO {
 
     private Integer totalVotos;
+    private Integer totalVotosAFavor;
+    private Integer totalVotosContra;
     private SituacaoVotacao situacao;
 
     public Integer getTotalVotos() {
@@ -26,5 +28,21 @@ public class ResultadoSessaoDTO {
 
     public void setSituacao(SituacaoVotacao situacao) {
         this.situacao = situacao;
+    }
+
+    public Integer getTotalVotosAFavor() {
+        return totalVotosAFavor;
+    }
+
+    public void setTotalVotosAFavor(Integer totalVotosAFavor) {
+        this.totalVotosAFavor = totalVotosAFavor;
+    }
+
+    public Integer getTotalVotosContra() {
+        return totalVotosContra;
+    }
+
+    public void setTotalVotosContra(Integer totalVotosContra) {
+        this.totalVotosContra = totalVotosContra;
     }
 }
