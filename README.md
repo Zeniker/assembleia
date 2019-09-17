@@ -43,3 +43,11 @@ selecionar a visão "Rich Preview".
 Os testes de performance foram realizados em uma máquina com 8GB de RAM, Processador Intel Core I5-7200. 
 Foram feitos através do software JMeter. Os resultados se encontram na pasta testePerformance, na raiz do projeto.
 Para visualizá-los, basta abrir o arquivo index.html no navegador.
+
+### Versionamento
+
+O versionamento desta API se dará através das releases do Github, onde cada release culminará em uma modificação no link da api. 
+Exemplo:
+- v1: www.assembleia.com.br/v1/
+- v2: www.assembleia.com.br/v2/
+- v3: www.assembleia.com.br/v3/
