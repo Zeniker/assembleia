@@ -37,3 +37,9 @@ docker-compose up
 A API foi documentada utilizando os padrões de OpenAPI. O arquivo está na raiz, com o nome de documentacao_openapi.yaml.
 Para visualizá-lo de maneira mais amigável, pode utilizar o site https://openapi.design, carregar o arquivo nele e 
 selecionar a visão "Rich Preview".
+
+### Testes De Performance
+
+Os testes de performance foram realizados em uma máquina com 8GB de RAM, Processador Intel Core I5-7200. 
+Foram feitos através do software JMeter. Os resultados se encontram na pasta testePerformance, na raiz do projeto.
+Para visualizá-los, basta abrir o arquivo index.html no navegador.
