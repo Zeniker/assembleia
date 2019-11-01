@@ -2,12 +2,11 @@ package br.com.guilherme.assembleia.sessao.controller;
 
 import br.com.guilherme.assembleia.commons.dto.ResponseDTO;
 import br.com.guilherme.assembleia.commons.dto.StatusResposta;
-import br.com.guilherme.assembleia.pauta.exceptions.PautaNaoEncontradaException;
 import br.com.guilherme.assembleia.sessao.dto.AbrirSessaoRequestDTO;
 import br.com.guilherme.assembleia.sessao.dto.AbrirSessaoResponseDTO;
 import br.com.guilherme.assembleia.sessao.dto.ResultadoSessaoDTO;
 import br.com.guilherme.assembleia.sessao.model.Sessao;
-import br.com.guilherme.assembleia.sessao.service.SessaoService;
+import br.com.guilherme.assembleia.sessao.service.SessaoServiceImpl;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -16,7 +15,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.BDDMockito.then;
@@ -26,7 +24,7 @@ import static org.mockito.Mockito.doThrow;
 class SessaoControllerTest {
 
     @Mock
-    private SessaoService sessaoService;
+    private SessaoServiceImpl sessaoService;
 
     @InjectMocks
     private SessaoController sessaoController;

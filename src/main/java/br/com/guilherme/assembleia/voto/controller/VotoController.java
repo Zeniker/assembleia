@@ -4,7 +4,7 @@ import br.com.guilherme.assembleia.commons.dto.ResponseDTO;
 import br.com.guilherme.assembleia.voto.dto.RegistrarVotoRequestDTO;
 import br.com.guilherme.assembleia.voto.dto.RegistrarVotoResponseDTO;
 import br.com.guilherme.assembleia.voto.model.Voto;
-import br.com.guilherme.assembleia.voto.service.VotoService;
+import br.com.guilherme.assembleia.voto.service.VotoServiceImpl;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,9 +21,9 @@ import javax.validation.Valid;
 @RequestMapping("voto")
 public class VotoController {
 
-    private VotoService votoService;
+    private VotoServiceImpl votoService;
 
-    public VotoController(VotoService votoService) {
+    public VotoController(VotoServiceImpl votoService) {
         this.votoService = votoService;
     }
 

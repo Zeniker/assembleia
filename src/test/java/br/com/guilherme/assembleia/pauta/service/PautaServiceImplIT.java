@@ -13,10 +13,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
 @ActiveProfiles("test")
-class PautaServiceIT implements TesteIntegracao {
+class PautaServiceImplIT implements TesteIntegracao {
 
     @Autowired
-    private PautaService pautaService;
+    private PautaServiceImpl pautaService;
 
     private NovaPautaRequestDTO pautaDTO;
 

@@ -23,13 +23,13 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.BDDMockito.then;
 
 @ExtendWith(MockitoExtension.class)
-public class PautaServiceTest {
+public class PautaServiceImplTest {
 
     @Mock
     private PautaRepository pautaRepository;
 
     @InjectMocks
-    private PautaService pautaService;
+    private PautaServiceImpl pautaService;
 
     @Captor
     private ArgumentCaptor<Pauta> captor;
