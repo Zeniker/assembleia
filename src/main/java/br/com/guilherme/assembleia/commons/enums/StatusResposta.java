@@ -1,4 +1,4 @@
-package br.com.guilherme.assembleia.commons.dto;
+package br.com.guilherme.assembleia.commons.enums;
 
 /**
  * Enum com os possíveis status que uma resposta pode possuir

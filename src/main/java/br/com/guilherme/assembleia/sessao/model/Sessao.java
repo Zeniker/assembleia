@@ -1,6 +1,7 @@
 package br.com.guilherme.assembleia.sessao.model;
 
 import br.com.guilherme.assembleia.pauta.model.Pauta;
+import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -12,6 +13,7 @@ import java.time.LocalDateTime;
  *
  * @author Guilherme Lacerda
  */
+@Data
 @Entity
 public class Sessao {
 
@@ -31,36 +33,4 @@ public class Sessao {
     private LocalDateTime dataHoraFechamento;
 
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Pauta getPauta() {
-        return pauta;
-    }
-
-    public void setPauta(Pauta pauta) {
-        this.pauta = pauta;
-    }
-
-
-    public LocalDateTime getDataHoraAbertura() {
-        return dataHoraAbertura;
-    }
-
-    public void setDataHoraAbertura(LocalDateTime dataHoraAbertura) {
-        this.dataHoraAbertura = dataHoraAbertura;
-    }
-
-    public LocalDateTime getDataHoraFechamento() {
-        return dataHoraFechamento;
-    }
-
-    public void setDataHoraFechamento(LocalDateTime dataHoraFechamento) {
-        this.dataHoraFechamento = dataHoraFechamento;
-    }
 }

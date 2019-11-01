@@ -1,5 +1,7 @@
 package br.com.guilherme.assembleia.sessao.dto;
 
+import lombok.*;
+
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
@@ -8,6 +10,8 @@ import javax.validation.constraints.NotNull;
  *
  * @author Guilherme Lacerda
  */
+
+@Data
 public class AbrirSessaoRequestDTO {
 
     @NotNull
@@ -16,19 +20,4 @@ public class AbrirSessaoRequestDTO {
     @Min(1)
     private Integer duracaoSessao;
 
-    public Integer getPauta() {
-        return pauta;
-    }
-
-    public void setPauta(Integer pauta) {
-        this.pauta = pauta;
-    }
-
-    public Integer getDuracaoSessao() {
-        return duracaoSessao;
-    }
-
-    public void setDuracaoSessao(Integer duracaoSessao) {
-        this.duracaoSessao = duracaoSessao;
-    }
 }

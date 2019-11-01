@@ -6,6 +6,7 @@ import br.com.guilherme.assembleia.sessao.dto.AbrirSessaoResponseDTO;
 import br.com.guilherme.assembleia.sessao.dto.ResultadoSessaoDTO;
 import br.com.guilherme.assembleia.sessao.model.Sessao;
 import br.com.guilherme.assembleia.sessao.service.SessaoServiceImpl;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -15,6 +16,7 @@ import javax.validation.Valid;
  *
  * @author Guilherme Lacerda
  */
+@Slf4j
 @RestController
 @RequestMapping("sessao")
 public class SessaoController {
@@ -40,6 +42,7 @@ public class SessaoController {
             AbrirSessaoResponseDTO responseDTO = new AbrirSessaoResponseDTO(sessao.getId());
             response = new ResponseDTO<>("Sessão aberta com sucesso", responseDTO);
         }catch (Exception e){
+            log.error("Erro ao abrir sessão", e);
             response = new ResponseDTO<>(e);
         }
 
@@ -60,6 +63,7 @@ public class SessaoController {
             ResultadoSessaoDTO resultado = sessaoService.buscarResultadoSessao(id);
             response = new ResponseDTO<>("Resultado consultado com sucesso", resultado);
         }catch (Exception e){
+            log.error("Erro ao buscar o resultado da sessão", e);
             response = new ResponseDTO<>(e);
         }
 

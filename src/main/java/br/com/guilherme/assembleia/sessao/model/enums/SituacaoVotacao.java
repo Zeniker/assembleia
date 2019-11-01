@@ -1,4 +1,4 @@
-package br.com.guilherme.assembleia.sessao.model;
+package br.com.guilherme.assembleia.sessao.model.enums;
 
 /**
  * Enum com as possíveis situações que uma sessão pode ter

@@ -6,10 +6,10 @@ import br.com.guilherme.assembleia.sessao.dto.ResultadoSessaoDTO;
 import br.com.guilherme.assembleia.sessao.exceptions.SessaoAbertaException;
 import br.com.guilherme.assembleia.sessao.exceptions.SessaoNaoEncontradaException;
 import br.com.guilherme.assembleia.sessao.model.Sessao;
-import br.com.guilherme.assembleia.sessao.model.SituacaoVotacao;
+import br.com.guilherme.assembleia.sessao.model.enums.SituacaoVotacao;
 import br.com.guilherme.assembleia.sessao.repository.SessaoRepository;
 import br.com.guilherme.assembleia.voto.model.Voto;
-import br.com.guilherme.assembleia.voto.model.VotoEscolha;
+import br.com.guilherme.assembleia.voto.model.enums.VotoEscolha;
 import br.com.guilherme.assembleia.voto.repository.VotoRepository;
 import org.springframework.stereotype.Service;
 

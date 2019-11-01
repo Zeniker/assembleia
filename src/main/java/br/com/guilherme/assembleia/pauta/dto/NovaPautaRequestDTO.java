@@ -1,5 +1,7 @@
 package br.com.guilherme.assembleia.pauta.dto;
 
+import lombok.Data;
+
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
@@ -8,17 +10,10 @@ import javax.validation.constraints.NotNull;
  *
  * @author Guilherme Lacerda
  */
+@Data
 public class NovaPautaRequestDTO {
 
     @NotNull
     @NotEmpty
     private String assunto;
-
-    public String getAssunto() {
-        return assunto;
-    }
-
-    public void setAssunto(String assunto) {
-        this.assunto = assunto;
-    }
 }
