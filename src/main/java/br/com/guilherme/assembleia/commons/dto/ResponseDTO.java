@@ -1,6 +1,7 @@
 package br.com.guilherme.assembleia.commons.dto;
 
 import br.com.guilherme.assembleia.commons.enums.StatusResposta;
+import lombok.Getter;
 
 /**
  * DTO de response padrão da API
@@ -9,6 +10,7 @@ import br.com.guilherme.assembleia.commons.enums.StatusResposta;
  *
  * @author Guilherme Lacerda
  */
+@Getter
 public class ResponseDTO<T> {
 
     private StatusResposta status;
@@ -24,17 +26,5 @@ public class ResponseDTO<T> {
     public ResponseDTO(Exception exception) {
         this.status = StatusResposta.ERRO;
         this.mensagem = exception.getMessage();
-    }
-
-    public StatusResposta getStatus() {
-        return status;
-    }
-
-    public String getMensagem() {
-        return mensagem;
-    }
-
-    public T getData() {
-        return data;
     }
 }

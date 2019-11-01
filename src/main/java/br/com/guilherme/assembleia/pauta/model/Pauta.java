@@ -1,5 +1,6 @@
 package br.com.guilherme.assembleia.pauta.model;
 
+import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.Entity;
@@ -11,6 +12,7 @@ import javax.persistence.Id;
  *
  * @author Guilherme Lacerda
  */
+@Data
 @Entity
 public class Pauta {
 
@@ -21,19 +23,4 @@ public class Pauta {
 
     private String assunto;
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getAssunto() {
-        return assunto;
-    }
-
-    public void setAssunto(String assunto) {
-        this.assunto = assunto;
-    }
 }
