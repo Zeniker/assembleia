@@ -1,7 +1,7 @@
 package br.com.guilherme.assembleia.sessao.service;
 
 import br.com.guilherme.assembleia.pauta.model.Pauta;
-import br.com.guilherme.assembleia.pauta.service.PautaService;
+import br.com.guilherme.assembleia.pauta.service.PautaServiceImpl;
 import br.com.guilherme.assembleia.sessao.dto.AbrirSessaoRequestDTO;
 import br.com.guilherme.assembleia.sessao.dto.ResultadoSessaoDTO;
 import br.com.guilherme.assembleia.sessao.exceptions.SessaoAbertaException;
@@ -22,7 +22,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
@@ -34,22 +33,21 @@ import static org.junit.jupiter.api.Assertions.assertTimeoutPreemptively;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.BDDMockito.then;
-import static org.mockito.Mockito.times;
 
 @ExtendWith(MockitoExtension.class)
-class SessaoServiceTest {
+class SessaoServiceImplTest {
 
     @Mock
     private SessaoRepository sessaoRepository;
 
     @Mock
-    private PautaService pautaService;
+    private PautaServiceImpl pautaService;
 
     @Mock
     private VotoRepository votoRepository;
 
     @InjectMocks
-    private SessaoService sessaoService;
+    private SessaoServiceImpl sessaoService;
 
     @Captor
     private ArgumentCaptor<Sessao> captor;

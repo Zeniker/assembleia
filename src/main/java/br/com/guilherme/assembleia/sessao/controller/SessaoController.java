@@ -5,7 +5,7 @@ import br.com.guilherme.assembleia.sessao.dto.AbrirSessaoRequestDTO;
 import br.com.guilherme.assembleia.sessao.dto.AbrirSessaoResponseDTO;
 import br.com.guilherme.assembleia.sessao.dto.ResultadoSessaoDTO;
 import br.com.guilherme.assembleia.sessao.model.Sessao;
-import br.com.guilherme.assembleia.sessao.service.SessaoService;
+import br.com.guilherme.assembleia.sessao.service.SessaoServiceImpl;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -19,9 +19,9 @@ import javax.validation.Valid;
 @RequestMapping("sessao")
 public class SessaoController {
 
-    private SessaoService sessaoService;
+    private SessaoServiceImpl sessaoService;
 
-    public SessaoController(SessaoService sessaoService) {
+    public SessaoController(SessaoServiceImpl sessaoService) {
         this.sessaoService = sessaoService;
     }
 

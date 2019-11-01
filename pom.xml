@@ -42,6 +42,11 @@
 			</exclusions>
 		</dependency>
 
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+		</dependency>
+
 		<!-- DB -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -80,7 +85,6 @@
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpclient</artifactId>
-			<version>4.5.10</version>
 		</dependency>
 
 

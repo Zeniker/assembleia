@@ -2,7 +2,7 @@ package br.com.guilherme.assembleia.voto.service;
 
 import br.com.guilherme.assembleia.sessao.exceptions.SessaoFechadaException;
 import br.com.guilherme.assembleia.sessao.model.Sessao;
-import br.com.guilherme.assembleia.sessao.service.SessaoService;
+import br.com.guilherme.assembleia.sessao.service.SessaoServiceImpl;
 import br.com.guilherme.assembleia.voto.dto.CPFStatusDTO;
 import br.com.guilherme.assembleia.voto.dto.RegistrarVotoRequestDTO;
 import br.com.guilherme.assembleia.voto.exception.AssociadoJaVotouException;
@@ -33,19 +33,19 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.BDDMockito.then;
 
 @ExtendWith(MockitoExtension.class)
-class VotoServiceTest {
+class VotoServiceImplTest {
 
     @Mock
     private VotoRepository votoRepository;
 
     @Mock
-    private SessaoService sessaoService;
+    private SessaoServiceImpl sessaoService;
 
     @Mock
     private ElegibilidadeVoto elegibilidadeVoto;
 
     @InjectMocks
-    private VotoService votoService;
+    private VotoServiceImpl votoService;
 
     @Captor
     private ArgumentCaptor<Voto> captor;

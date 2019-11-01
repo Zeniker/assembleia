@@ -5,7 +5,6 @@ import br.com.guilherme.assembleia.sessao.dto.AbrirSessaoRequestDTO;
 import br.com.guilherme.assembleia.sessao.dto.ResultadoSessaoDTO;
 import br.com.guilherme.assembleia.sessao.model.Sessao;
 import br.com.guilherme.assembleia.sessao.util.SessaoUtil;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,10 +15,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
 @ActiveProfiles("test")
-class SessaoServiceIT implements TesteIntegracao {
+class SessaoServiceImplIT implements TesteIntegracao {
 
     @Autowired
-    private SessaoService sessaoService;
+    private SessaoServiceImpl sessaoService;
 
     @DisplayName("Teste abriu sessão no BD")
     @Test
