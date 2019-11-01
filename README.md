@@ -22,6 +22,7 @@ as entidades sejam criadas ao iniciar a aplicação.
 - H2: Banco em memórias utilizado nos testes da aplicação.
 - Spring Boot Maven Plugin: Utilizado para subir a aplicação através do maven.
 - Apache Http: Utilizado devido à facilidade de realizar requisições através de sua api.
+- Lombok: Utilizado para eliminar a necessidade de criação de getters, setters e logs.
 
 ### Execução
 
@@ -32,11 +33,18 @@ necessárias e iniciar a aplicação na sequência.
 docker-compose up
 ```
 
+A api ficará disponível na porta 8080, podendo ser acessada pelo link abaixo.
+
+```
+http://localhost:8080/
+```
+
 ### Documentação API
 
-A API foi documentada utilizando os padrões de OpenAPI. O arquivo está na raiz, com o nome de documentacao_openapi.yaml.
-Para visualizá-lo de maneira mais amigável, pode utilizar o site https://openapi.design, carregar o arquivo nele e 
-selecionar a visão "Rich Preview".
+A documentação da api foi disponibilizada através de Swagger. Pode acessa-lá a partir da url abaixo
+```
+http://localhost:8080/swagger-ui.html
+```
 
 ### Testes De Performance
 
