@@ -5,6 +5,7 @@ import br.com.guilherme.assembleia.pauta.dto.NovaPautaRequestDTO;
 import br.com.guilherme.assembleia.pauta.dto.NovaPautaResponseDTO;
 import br.com.guilherme.assembleia.pauta.model.Pauta;
 import br.com.guilherme.assembleia.pauta.service.PautaServiceImpl;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +18,7 @@ import javax.validation.Valid;
  *
  * @author Guilherme Lacerda
  */
+@Slf4j
 @RestController
 @RequestMapping("pauta")
 public class PautaController {
@@ -45,6 +47,7 @@ public class PautaController {
             response = new ResponseDTO<>("Pauta criada com sucesso", responseDTO);
 
         }catch (Exception e){
+            log.error("Erro ao criar pauta", e);
             response = new ResponseDTO<>(e);
         }
 
