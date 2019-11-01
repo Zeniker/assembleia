@@ -7,7 +7,7 @@ import br.com.guilherme.assembleia.sessao.service.SessaoServiceImpl;
 import br.com.guilherme.assembleia.sessao.util.SessaoUtil;
 import br.com.guilherme.assembleia.voto.dto.RegistrarVotoRequestDTO;
 import br.com.guilherme.assembleia.voto.model.Voto;
-import br.com.guilherme.assembleia.voto.model.VotoEscolha;
+import br.com.guilherme.assembleia.voto.model.enums.VotoEscolha;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

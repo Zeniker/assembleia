@@ -1,7 +1,7 @@
 package br.com.guilherme.assembleia.voto.controller;
 
 import br.com.guilherme.assembleia.commons.dto.ResponseDTO;
-import br.com.guilherme.assembleia.commons.dto.StatusResposta;
+import br.com.guilherme.assembleia.commons.enums.StatusResposta;
 import br.com.guilherme.assembleia.voto.dto.RegistrarVotoRequestDTO;
 import br.com.guilherme.assembleia.voto.dto.RegistrarVotoResponseDTO;
 import br.com.guilherme.assembleia.voto.model.Voto;

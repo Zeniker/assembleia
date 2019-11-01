@@ -1,6 +1,6 @@
 package br.com.guilherme.assembleia.voto.dto;
 
-import br.com.guilherme.assembleia.voto.model.VotoEscolha;
+import br.com.guilherme.assembleia.voto.model.enums.VotoEscolha;
 
 import javax.validation.constraints.NotNull;
 

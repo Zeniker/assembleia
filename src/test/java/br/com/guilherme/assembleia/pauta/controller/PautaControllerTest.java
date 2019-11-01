@@ -1,7 +1,7 @@
 package br.com.guilherme.assembleia.pauta.controller;
 
 import br.com.guilherme.assembleia.commons.dto.ResponseDTO;
-import br.com.guilherme.assembleia.commons.dto.StatusResposta;
+import br.com.guilherme.assembleia.commons.enums.StatusResposta;
 import br.com.guilherme.assembleia.pauta.dto.NovaPautaRequestDTO;
 import br.com.guilherme.assembleia.pauta.dto.NovaPautaResponseDTO;
 import br.com.guilherme.assembleia.pauta.model.Pauta;

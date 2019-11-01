@@ -8,7 +8,7 @@ import br.com.guilherme.assembleia.voto.dto.RegistrarVotoRequestDTO;
 import br.com.guilherme.assembleia.voto.exception.AssociadoJaVotouException;
 import br.com.guilherme.assembleia.voto.exception.AssociadoNaoElegivelException;
 import br.com.guilherme.assembleia.voto.model.Voto;
-import br.com.guilherme.assembleia.voto.model.VotoEscolha;
+import br.com.guilherme.assembleia.voto.model.enums.VotoEscolha;
 import br.com.guilherme.assembleia.voto.repository.VotoRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

@@ -1,7 +1,7 @@
 package br.com.guilherme.assembleia.sessao.controller;
 
 import br.com.guilherme.assembleia.commons.dto.ResponseDTO;
-import br.com.guilherme.assembleia.commons.dto.StatusResposta;
+import br.com.guilherme.assembleia.commons.enums.StatusResposta;
 import br.com.guilherme.assembleia.sessao.dto.AbrirSessaoRequestDTO;
 import br.com.guilherme.assembleia.sessao.dto.AbrirSessaoResponseDTO;
 import br.com.guilherme.assembleia.sessao.dto.ResultadoSessaoDTO;

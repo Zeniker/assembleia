@@ -1,5 +1,7 @@
 package br.com.guilherme.assembleia.commons.dto;
 
+import br.com.guilherme.assembleia.commons.enums.StatusResposta;
+
 /**
  * DTO de response padrão da API
  *

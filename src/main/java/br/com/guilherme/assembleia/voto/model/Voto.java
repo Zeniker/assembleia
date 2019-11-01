@@ -1,6 +1,7 @@
 package br.com.guilherme.assembleia.voto.model;
 
 import br.com.guilherme.assembleia.sessao.model.Sessao;
+import br.com.guilherme.assembleia.voto.model.enums.VotoEscolha;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.Entity;

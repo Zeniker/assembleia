@@ -1,6 +1,6 @@
 package br.com.guilherme.assembleia.sessao.dto;
 
-import br.com.guilherme.assembleia.sessao.model.SituacaoVotacao;
+import br.com.guilherme.assembleia.sessao.model.enums.SituacaoVotacao;
 
 /**
  * DTO com o resultado de uma sessão
