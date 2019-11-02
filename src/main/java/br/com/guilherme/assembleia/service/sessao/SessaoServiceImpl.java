@@ -1,5 +1,6 @@
 package br.com.guilherme.assembleia.service.sessao;
 
+import br.com.guilherme.assembleia.queue.QueueSender;
 import br.com.guilherme.assembleia.service.pauta.PautaServiceImpl;
 import br.com.guilherme.assembleia.dto.sessao.AbrirSessaoRequestDTO;
 import br.com.guilherme.assembleia.dto.sessao.ResultadoSessaoDTO;
@@ -15,6 +16,8 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.stream.Collectors;
 
 /**
@@ -31,10 +34,15 @@ public class SessaoServiceImpl implements SessaoService{
 
     private VotoRepository votoRepository;
 
-    public SessaoServiceImpl(SessaoRepository sessaoRepository, PautaServiceImpl pautaService, VotoRepository votoRepository) {
+    private QueueSender queueSender;
+
+    public SessaoServiceImpl(SessaoRepository sessaoRepository, PautaServiceImpl pautaService, VotoRepository votoRepository,
+                             QueueSender queueSender) {
+
         this.sessaoRepository = sessaoRepository;
         this.pautaService = pautaService;
         this.votoRepository = votoRepository;
+        this.queueSender = queueSender;
     }
 
 
@@ -47,20 +55,36 @@ public class SessaoServiceImpl implements SessaoService{
     public Sessao abrirSessao(AbrirSessaoRequestDTO abrirSessaoDTO) {
         LocalDateTime dataHoraAbertura = LocalDateTime.now();
 
+        validaDuracaoSessao(abrirSessaoDTO);
+
         Sessao sessao = new Sessao();
         sessao.setPauta(pautaService.buscarPautaPorId(abrirSessaoDTO.getPauta()));
         sessao.setDataHoraAbertura(dataHoraAbertura);
         sessao.setDataHoraFechamento(calculaDataHoraFechamento(dataHoraAbertura, abrirSessaoDTO.getDuracaoSessao()));
 
         sessao = sessaoRepository.save(sessao);
+        agendaFechamentoSessao(sessao, abrirSessaoDTO.getDuracaoSessao());
 
         return sessao;
     }
 
+    private void validaDuracaoSessao(AbrirSessaoRequestDTO abrirSessaoRequestDTO){
+        if(abrirSessaoRequestDTO.getDuracaoSessao() == null){
+            abrirSessaoRequestDTO.setDuracaoSessao(60);
+        }
+    }
+
     private LocalDateTime calculaDataHoraFechamento(LocalDateTime dataHoraAbertura, Integer duracao){
-        if(duracao == null) duracao = 60;
 
         return dataHoraAbertura.plusSeconds(duracao);
+    }
+
+    private void agendaFechamentoSessao(final Sessao sessao, Integer segundosParaFechar){
+
+        TimerTask tarefaFechamento = new NotificacaoResultadoSessao(this, sessao.getId(), queueSender);
+
+        Timer timer = new Timer("Notificação de encerramento da sessão");
+        timer.schedule(tarefaFechamento, (segundosParaFechar + 2)* 1000);
     }
 
     /**
@@ -109,6 +133,7 @@ public class SessaoServiceImpl implements SessaoService{
         resultado.setSituacao(SituacaoVotacao.getSituacao(totalAFavor, totalContra));
         resultado.setTotalVotosAFavor(totalAFavor);
         resultado.setTotalVotosContra(totalContra);
+        resultado.setIdSessao(id);
 
         return resultado;
     }

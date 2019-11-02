@@ -1,6 +1,7 @@
 package br.com.guilherme.assembleia.service.sessao;
 
 import br.com.guilherme.assembleia.entity.Pauta;
+import br.com.guilherme.assembleia.queue.QueueSender;
 import br.com.guilherme.assembleia.service.pauta.PautaServiceImpl;
 import br.com.guilherme.assembleia.dto.sessao.AbrirSessaoRequestDTO;
 import br.com.guilherme.assembleia.dto.sessao.ResultadoSessaoDTO;
@@ -21,6 +22,7 @@ import org.mockito.Captor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
@@ -31,8 +33,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTimeoutPreemptively;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.BDDMockito.then;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class SessaoServiceImplTest {
@@ -45,6 +49,9 @@ class SessaoServiceImplTest {
 
     @Mock
     private VotoRepository votoRepository;
+
+    @Mock
+    private QueueSender queueSender;
 
     @InjectMocks
     private SessaoServiceImpl sessaoService;
