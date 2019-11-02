@@ -23,6 +23,7 @@ as entidades sejam criadas ao iniciar a aplicação.
 - Spring Boot Maven Plugin: Utilizado para subir a aplicação através do maven.
 - Apache Http: Utilizado devido à facilidade de realizar requisições através de sua api.
 - Lombok: Utilizado para eliminar a necessidade de criação de getters, setters e logs.
+- RabbitMQ: Utilizado para controlar filas e mensageria
 
 ### Execução
 
@@ -30,6 +31,7 @@ Para executar a aplicação, basta ir na raiz do projeto e executar o comando ab
 necessárias e iniciar a aplicação na sequência. 
 
 ```
+docker-compose build
 docker-compose up
 ```
 
