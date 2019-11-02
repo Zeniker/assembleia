@@ -1,12 +1,12 @@
 package br.com.guilherme.assembleia.service.voto;
 
-import br.com.guilherme.assembleia.sessao.exceptions.SessaoFechadaException;
+import br.com.guilherme.assembleia.exception.SessaoFechadaException;
 import br.com.guilherme.assembleia.entity.Sessao;
 import br.com.guilherme.assembleia.service.sessao.SessaoServiceImpl;
 import br.com.guilherme.assembleia.dto.voto.CPFStatusDTO;
 import br.com.guilherme.assembleia.dto.voto.RegistrarVotoRequestDTO;
-import br.com.guilherme.assembleia.voto.exception.AssociadoJaVotouException;
-import br.com.guilherme.assembleia.voto.exception.AssociadoNaoElegivelException;
+import br.com.guilherme.assembleia.exception.AssociadoJaVotouException;
+import br.com.guilherme.assembleia.exception.AssociadoNaoElegivelException;
 import br.com.guilherme.assembleia.entity.Voto;
 import br.com.guilherme.assembleia.repository.VotoRepository;
 import org.springframework.stereotype.Service;

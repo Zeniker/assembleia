@@ -1,4 +1,4 @@
-package br.com.guilherme.assembleia.sessao.exceptions;
+package br.com.guilherme.assembleia.exception;
 
 /**
  * Exceção a ser utilizada quando a sessão estiver fechada durante uma operação

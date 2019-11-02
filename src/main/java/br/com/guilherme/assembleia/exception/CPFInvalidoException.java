@@ -1,4 +1,4 @@
-package br.com.guilherme.assembleia.voto.exception;
+package br.com.guilherme.assembleia.exception;
 
 /**
  * Exceção para ser utilizada quando o cpf do associado for inválido

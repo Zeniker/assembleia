@@ -1,4 +1,4 @@
-package br.com.guilherme.assembleia.pauta.exceptions;
+package br.com.guilherme.assembleia.exception;
 
 /**
  * Exceção a ser utilizada quando a pauta não for encontrada em uma operação.
