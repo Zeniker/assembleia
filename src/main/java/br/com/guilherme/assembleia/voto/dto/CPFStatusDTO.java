@@ -8,6 +8,8 @@ import lombok.*;
  * @author Guilherme Lacerda
  */
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class CPFStatusDTO {
 
     private String status;
