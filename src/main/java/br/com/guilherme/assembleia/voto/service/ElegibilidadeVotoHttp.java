@@ -3,18 +3,31 @@ package br.com.guilherme.assembleia.voto.service;
 import br.com.guilherme.assembleia.voto.dto.CPFStatusDTO;
 import br.com.guilherme.assembleia.voto.exception.CPFInvalidoException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.springframework.context.annotation.Primary;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
 
 @Component
+@Slf4j
 public class ElegibilidadeVotoHttp implements ElegibilidadeVoto {
+
+    private RestTemplate restTemplate;
+
+    private final String URI = "https://user-info.herokuapp.com/users/{cpf}";
+
+    public ElegibilidadeVotoHttp(RestTemplate restTemplate) {
+        this.restTemplate = restTemplate;
+    }
 
     /**
      * Verifica em um serviço de terceiro se o cpf informado está elegível para voto e retorna seu status
@@ -25,20 +38,16 @@ public class ElegibilidadeVotoHttp implements ElegibilidadeVoto {
     public CPFStatusDTO associadoPodeVotar(String cpf){
 
         try{
-            CloseableHttpClient httpClient = HttpClients.createDefault();
+            ResponseEntity<CPFStatusDTO> entity = restTemplate.getForEntity(URI, CPFStatusDTO.class, cpf);
 
-            HttpGet get = new HttpGet("https://user-info.herokuapp.com/users/" + cpf);
+            if(!entity.getStatusCode().is2xxSuccessful()) throw new CPFInvalidoException();
 
-            HttpResponse httpResponse = httpClient.execute(get);
+            return entity.getBody();
+        }catch (RuntimeException e){
+            String mensagem = "Não foi possível consultar o CPF do associado: " + cpf;
+            log.error(mensagem, e);
 
-            if(httpResponse.getStatusLine().getStatusCode() == 404) throw new CPFInvalidoException();
-
-            String responseBody = EntityUtils.toString(httpResponse.getEntity());
-
-            return new ObjectMapper().readValue(responseBody, CPFStatusDTO.class);
-
-        }catch (IOException e){
-            throw new RuntimeException("Não foi possível consultar o CPF do associado");
+            throw new CPFInvalidoException();
         }
     }
 }
