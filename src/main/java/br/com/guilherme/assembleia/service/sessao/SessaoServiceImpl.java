@@ -7,10 +7,10 @@ import br.com.guilherme.assembleia.sessao.exceptions.SessaoAbertaException;
 import br.com.guilherme.assembleia.sessao.exceptions.SessaoNaoEncontradaException;
 import br.com.guilherme.assembleia.entity.Sessao;
 import br.com.guilherme.assembleia.enums.SituacaoVotacao;
-import br.com.guilherme.assembleia.sessao.repository.SessaoRepository;
+import br.com.guilherme.assembleia.repository.SessaoRepository;
 import br.com.guilherme.assembleia.entity.Voto;
 import br.com.guilherme.assembleia.enums.VotoEscolha;
-import br.com.guilherme.assembleia.voto.repository.VotoRepository;
+import br.com.guilherme.assembleia.repository.VotoRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;

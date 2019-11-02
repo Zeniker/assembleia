@@ -9,7 +9,7 @@ import br.com.guilherme.assembleia.voto.exception.AssociadoJaVotouException;
 import br.com.guilherme.assembleia.voto.exception.AssociadoNaoElegivelException;
 import br.com.guilherme.assembleia.entity.Voto;
 import br.com.guilherme.assembleia.enums.VotoEscolha;
-import br.com.guilherme.assembleia.voto.repository.VotoRepository;
+import br.com.guilherme.assembleia.repository.VotoRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

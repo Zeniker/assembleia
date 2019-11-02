@@ -1,4 +1,4 @@
-package br.com.guilherme.assembleia.sessao.repository;
+package br.com.guilherme.assembleia.repository;
 
 
 import br.com.guilherme.assembleia.entity.Sessao;

@@ -3,7 +3,7 @@ package br.com.guilherme.assembleia.service.pauta;
 import br.com.guilherme.assembleia.dto.pauta.NovaPautaRequestDTO;
 import br.com.guilherme.assembleia.pauta.exceptions.PautaNaoEncontradaException;
 import br.com.guilherme.assembleia.entity.Pauta;
-import br.com.guilherme.assembleia.pauta.repository.PautaRepository;
+import br.com.guilherme.assembleia.repository.PautaRepository;
 import org.springframework.stereotype.Service;
 
 /**

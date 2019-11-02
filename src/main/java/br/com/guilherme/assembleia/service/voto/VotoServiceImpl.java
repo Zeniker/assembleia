@@ -8,7 +8,7 @@ import br.com.guilherme.assembleia.dto.voto.RegistrarVotoRequestDTO;
 import br.com.guilherme.assembleia.voto.exception.AssociadoJaVotouException;
 import br.com.guilherme.assembleia.voto.exception.AssociadoNaoElegivelException;
 import br.com.guilherme.assembleia.entity.Voto;
-import br.com.guilherme.assembleia.voto.repository.VotoRepository;
+import br.com.guilherme.assembleia.repository.VotoRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
