@@ -1,4 +1,4 @@
-package br.com.guilherme.assembleia.pauta.controller;
+package br.com.guilherme.assembleia.controller;
 
 import br.com.guilherme.assembleia.commons.dto.ResponseDTO;
 import br.com.guilherme.assembleia.pauta.dto.NovaPautaRequestDTO;
