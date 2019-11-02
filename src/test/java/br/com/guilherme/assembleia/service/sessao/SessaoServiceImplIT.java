@@ -1,6 +1,7 @@
-package br.com.guilherme.assembleia.sessao.service;
+package br.com.guilherme.assembleia.service.sessao;
 
 import br.com.guilherme.assembleia.TesteIntegracao;
+import br.com.guilherme.assembleia.service.sessao.SessaoServiceImpl;
 import br.com.guilherme.assembleia.sessao.dto.AbrirSessaoRequestDTO;
 import br.com.guilherme.assembleia.sessao.dto.ResultadoSessaoDTO;
 import br.com.guilherme.assembleia.sessao.model.Sessao;

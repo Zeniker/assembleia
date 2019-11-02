@@ -1,4 +1,4 @@
-package br.com.guilherme.assembleia.voto.service;
+package br.com.guilherme.assembleia.service.voto;
 
 import br.com.guilherme.assembleia.voto.dto.CPFStatusDTO;
 import org.springframework.context.annotation.Primary;

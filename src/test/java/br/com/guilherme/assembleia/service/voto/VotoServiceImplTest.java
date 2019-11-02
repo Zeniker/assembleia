@@ -1,8 +1,10 @@
-package br.com.guilherme.assembleia.voto.service;
+package br.com.guilherme.assembleia.service.voto;
 
+import br.com.guilherme.assembleia.service.voto.ElegibilidadeVoto;
+import br.com.guilherme.assembleia.service.voto.VotoServiceImpl;
 import br.com.guilherme.assembleia.sessao.exceptions.SessaoFechadaException;
 import br.com.guilherme.assembleia.sessao.model.Sessao;
-import br.com.guilherme.assembleia.sessao.service.SessaoServiceImpl;
+import br.com.guilherme.assembleia.service.sessao.SessaoServiceImpl;
 import br.com.guilherme.assembleia.voto.dto.CPFStatusDTO;
 import br.com.guilherme.assembleia.voto.dto.RegistrarVotoRequestDTO;
 import br.com.guilherme.assembleia.voto.exception.AssociadoJaVotouException;

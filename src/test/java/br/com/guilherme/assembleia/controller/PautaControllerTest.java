@@ -2,11 +2,10 @@ package br.com.guilherme.assembleia.controller;
 
 import br.com.guilherme.assembleia.commons.dto.ResponseDTO;
 import br.com.guilherme.assembleia.commons.enums.StatusResposta;
-import br.com.guilherme.assembleia.controller.PautaController;
 import br.com.guilherme.assembleia.pauta.dto.NovaPautaRequestDTO;
 import br.com.guilherme.assembleia.pauta.dto.NovaPautaResponseDTO;
 import br.com.guilherme.assembleia.pauta.model.Pauta;
-import br.com.guilherme.assembleia.pauta.service.PautaServiceImpl;
+import br.com.guilherme.assembleia.service.pauta.PautaServiceImpl;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

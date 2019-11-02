@@ -1,21 +1,11 @@
-package br.com.guilherme.assembleia.voto.service;
+package br.com.guilherme.assembleia.service.voto;
 
 import br.com.guilherme.assembleia.voto.dto.CPFStatusDTO;
 import br.com.guilherme.assembleia.voto.exception.CPFInvalidoException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
-import org.apache.http.util.EntityUtils;
-import org.springframework.context.annotation.Primary;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
-
-import java.io.IOException;
 
 @Component
 @Slf4j

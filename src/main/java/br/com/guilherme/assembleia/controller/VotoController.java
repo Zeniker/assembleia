@@ -4,7 +4,7 @@ import br.com.guilherme.assembleia.commons.dto.ResponseDTO;
 import br.com.guilherme.assembleia.voto.dto.RegistrarVotoRequestDTO;
 import br.com.guilherme.assembleia.voto.dto.RegistrarVotoResponseDTO;
 import br.com.guilherme.assembleia.voto.model.Voto;
-import br.com.guilherme.assembleia.voto.service.VotoServiceImpl;
+import br.com.guilherme.assembleia.service.voto.VotoServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
