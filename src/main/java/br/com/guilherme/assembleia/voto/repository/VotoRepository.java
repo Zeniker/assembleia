@@ -1,8 +1,8 @@
 package br.com.guilherme.assembleia.voto.repository;
 
 
-import br.com.guilherme.assembleia.sessao.model.Sessao;
-import br.com.guilherme.assembleia.voto.model.Voto;
+import br.com.guilherme.assembleia.entity.Sessao;
+import br.com.guilherme.assembleia.entity.Voto;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

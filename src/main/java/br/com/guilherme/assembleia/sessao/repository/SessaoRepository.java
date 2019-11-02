@@ -1,7 +1,7 @@
 package br.com.guilherme.assembleia.sessao.repository;
 
 
-import br.com.guilherme.assembleia.sessao.model.Sessao;
+import br.com.guilherme.assembleia.entity.Sessao;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**

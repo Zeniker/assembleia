@@ -1,6 +1,6 @@
 package br.com.guilherme.assembleia.pauta.repository;
 
-import br.com.guilherme.assembleia.pauta.model.Pauta;
+import br.com.guilherme.assembleia.entity.Pauta;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**

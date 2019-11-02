@@ -2,11 +2,11 @@ package br.com.guilherme.assembleia.service.voto;
 
 import br.com.guilherme.assembleia.TesteIntegracao;
 import br.com.guilherme.assembleia.dto.sessao.AbrirSessaoRequestDTO;
-import br.com.guilherme.assembleia.sessao.model.Sessao;
+import br.com.guilherme.assembleia.entity.Sessao;
 import br.com.guilherme.assembleia.service.sessao.SessaoServiceImpl;
 import br.com.guilherme.assembleia.util.SessaoUtil;
 import br.com.guilherme.assembleia.dto.voto.RegistrarVotoRequestDTO;
-import br.com.guilherme.assembleia.voto.model.Voto;
+import br.com.guilherme.assembleia.entity.Voto;
 import br.com.guilherme.assembleia.enums.VotoEscolha;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

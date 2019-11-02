@@ -3,7 +3,7 @@ package br.com.guilherme.assembleia.service.sessao;
 import br.com.guilherme.assembleia.TesteIntegracao;
 import br.com.guilherme.assembleia.dto.sessao.AbrirSessaoRequestDTO;
 import br.com.guilherme.assembleia.dto.sessao.ResultadoSessaoDTO;
-import br.com.guilherme.assembleia.sessao.model.Sessao;
+import br.com.guilherme.assembleia.entity.Sessao;
 import br.com.guilherme.assembleia.util.SessaoUtil;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

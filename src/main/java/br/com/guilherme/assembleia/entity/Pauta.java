@@ -1,4 +1,4 @@
-package br.com.guilherme.assembleia.pauta.model;
+package br.com.guilherme.assembleia.entity;
 
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;

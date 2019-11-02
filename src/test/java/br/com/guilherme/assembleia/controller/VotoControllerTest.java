@@ -4,7 +4,7 @@ import br.com.guilherme.assembleia.dto.commons.ResponseDTO;
 import br.com.guilherme.assembleia.enums.StatusResposta;
 import br.com.guilherme.assembleia.dto.voto.RegistrarVotoRequestDTO;
 import br.com.guilherme.assembleia.dto.voto.RegistrarVotoResponseDTO;
-import br.com.guilherme.assembleia.voto.model.Voto;
+import br.com.guilherme.assembleia.entity.Voto;
 import br.com.guilherme.assembleia.service.voto.VotoServiceImpl;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

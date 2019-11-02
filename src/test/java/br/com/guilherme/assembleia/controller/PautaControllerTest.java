@@ -4,7 +4,7 @@ import br.com.guilherme.assembleia.dto.commons.ResponseDTO;
 import br.com.guilherme.assembleia.enums.StatusResposta;
 import br.com.guilherme.assembleia.dto.pauta.NovaPautaRequestDTO;
 import br.com.guilherme.assembleia.dto.pauta.NovaPautaResponseDTO;
-import br.com.guilherme.assembleia.pauta.model.Pauta;
+import br.com.guilherme.assembleia.entity.Pauta;
 import br.com.guilherme.assembleia.service.pauta.PautaServiceImpl;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

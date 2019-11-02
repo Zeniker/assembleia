@@ -2,7 +2,7 @@ package br.com.guilherme.assembleia.service.sessao;
 
 import br.com.guilherme.assembleia.dto.sessao.AbrirSessaoRequestDTO;
 import br.com.guilherme.assembleia.dto.sessao.ResultadoSessaoDTO;
-import br.com.guilherme.assembleia.sessao.model.Sessao;
+import br.com.guilherme.assembleia.entity.Sessao;
 
 public interface SessaoService {
 

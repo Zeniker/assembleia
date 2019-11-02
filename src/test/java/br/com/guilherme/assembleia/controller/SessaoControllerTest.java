@@ -5,7 +5,7 @@ import br.com.guilherme.assembleia.enums.StatusResposta;
 import br.com.guilherme.assembleia.dto.sessao.AbrirSessaoRequestDTO;
 import br.com.guilherme.assembleia.dto.sessao.AbrirSessaoResponseDTO;
 import br.com.guilherme.assembleia.dto.sessao.ResultadoSessaoDTO;
-import br.com.guilherme.assembleia.sessao.model.Sessao;
+import br.com.guilherme.assembleia.entity.Sessao;
 import br.com.guilherme.assembleia.service.sessao.SessaoServiceImpl;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

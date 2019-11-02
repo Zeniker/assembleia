@@ -3,7 +3,7 @@ package br.com.guilherme.assembleia.controller;
 import br.com.guilherme.assembleia.dto.commons.ResponseDTO;
 import br.com.guilherme.assembleia.dto.pauta.NovaPautaRequestDTO;
 import br.com.guilherme.assembleia.dto.pauta.NovaPautaResponseDTO;
-import br.com.guilherme.assembleia.pauta.model.Pauta;
+import br.com.guilherme.assembleia.entity.Pauta;
 import br.com.guilherme.assembleia.service.pauta.PautaServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
