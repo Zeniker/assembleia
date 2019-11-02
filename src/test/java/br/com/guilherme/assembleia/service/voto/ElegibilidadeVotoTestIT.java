@@ -1,8 +1,7 @@
 package br.com.guilherme.assembleia.service.voto;
 
 import br.com.guilherme.assembleia.TesteIntegracao;
-import br.com.guilherme.assembleia.service.voto.ElegibilidadeVoto;
-import br.com.guilherme.assembleia.voto.dto.CPFStatusDTO;
+import br.com.guilherme.assembleia.dto.voto.CPFStatusDTO;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

@@ -1,8 +1,6 @@
 package br.com.guilherme.assembleia.service.voto;
 
-import br.com.guilherme.assembleia.voto.dto.CPFStatusDTO;
-import org.springframework.context.annotation.Primary;
-import org.springframework.stereotype.Component;
+import br.com.guilherme.assembleia.dto.voto.CPFStatusDTO;
 
 /**
  * Classe para verificar a elegibilidade de voto

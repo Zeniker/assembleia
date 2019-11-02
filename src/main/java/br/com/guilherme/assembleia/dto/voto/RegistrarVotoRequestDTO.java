@@ -1,6 +1,6 @@
-package br.com.guilherme.assembleia.voto.dto;
+package br.com.guilherme.assembleia.dto.voto;
 
-import br.com.guilherme.assembleia.voto.model.enums.VotoEscolha;
+import br.com.guilherme.assembleia.enums.VotoEscolha;
 import lombok.*;
 
 import javax.validation.constraints.NotNull;

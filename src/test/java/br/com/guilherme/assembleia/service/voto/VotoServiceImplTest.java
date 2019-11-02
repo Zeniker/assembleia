@@ -1,16 +1,14 @@
 package br.com.guilherme.assembleia.service.voto;
 
-import br.com.guilherme.assembleia.service.voto.ElegibilidadeVoto;
-import br.com.guilherme.assembleia.service.voto.VotoServiceImpl;
 import br.com.guilherme.assembleia.sessao.exceptions.SessaoFechadaException;
 import br.com.guilherme.assembleia.sessao.model.Sessao;
 import br.com.guilherme.assembleia.service.sessao.SessaoServiceImpl;
-import br.com.guilherme.assembleia.voto.dto.CPFStatusDTO;
-import br.com.guilherme.assembleia.voto.dto.RegistrarVotoRequestDTO;
+import br.com.guilherme.assembleia.dto.voto.CPFStatusDTO;
+import br.com.guilherme.assembleia.dto.voto.RegistrarVotoRequestDTO;
 import br.com.guilherme.assembleia.voto.exception.AssociadoJaVotouException;
 import br.com.guilherme.assembleia.voto.exception.AssociadoNaoElegivelException;
 import br.com.guilherme.assembleia.voto.model.Voto;
-import br.com.guilherme.assembleia.voto.model.enums.VotoEscolha;
+import br.com.guilherme.assembleia.enums.VotoEscolha;
 import br.com.guilherme.assembleia.voto.repository.VotoRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

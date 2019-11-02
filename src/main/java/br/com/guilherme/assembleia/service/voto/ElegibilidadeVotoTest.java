@@ -1,6 +1,6 @@
 package br.com.guilherme.assembleia.service.voto;
 
-import br.com.guilherme.assembleia.voto.dto.CPFStatusDTO;
+import br.com.guilherme.assembleia.dto.voto.CPFStatusDTO;
 import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;

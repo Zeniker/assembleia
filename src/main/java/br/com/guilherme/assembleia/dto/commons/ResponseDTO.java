@@ -1,6 +1,6 @@
-package br.com.guilherme.assembleia.commons.dto;
+package br.com.guilherme.assembleia.dto.commons;
 
-import br.com.guilherme.assembleia.commons.enums.StatusResposta;
+import br.com.guilherme.assembleia.enums.StatusResposta;
 import lombok.Getter;
 
 /**

@@ -1,11 +1,10 @@
 package br.com.guilherme.assembleia.service.sessao;
 
 import br.com.guilherme.assembleia.TesteIntegracao;
-import br.com.guilherme.assembleia.service.sessao.SessaoServiceImpl;
-import br.com.guilherme.assembleia.sessao.dto.AbrirSessaoRequestDTO;
-import br.com.guilherme.assembleia.sessao.dto.ResultadoSessaoDTO;
+import br.com.guilherme.assembleia.dto.sessao.AbrirSessaoRequestDTO;
+import br.com.guilherme.assembleia.dto.sessao.ResultadoSessaoDTO;
 import br.com.guilherme.assembleia.sessao.model.Sessao;
-import br.com.guilherme.assembleia.sessao.util.SessaoUtil;
+import br.com.guilherme.assembleia.util.SessaoUtil;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

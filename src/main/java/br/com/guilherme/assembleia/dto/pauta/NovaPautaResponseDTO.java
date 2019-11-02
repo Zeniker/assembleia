@@ -1,4 +1,4 @@
-package br.com.guilherme.assembleia.pauta.dto;
+package br.com.guilherme.assembleia.dto.pauta;
 
 import lombok.*;
 

@@ -1,9 +1,7 @@
 package br.com.guilherme.assembleia.service.voto;
 
 import br.com.guilherme.assembleia.TesteIntegracao;
-import br.com.guilherme.assembleia.service.voto.ElegibilidadeVoto;
-import br.com.guilherme.assembleia.service.voto.ElegibilidadeVotoHttp;
-import br.com.guilherme.assembleia.voto.dto.CPFStatusDTO;
+import br.com.guilherme.assembleia.dto.voto.CPFStatusDTO;
 import br.com.guilherme.assembleia.voto.exception.CPFInvalidoException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

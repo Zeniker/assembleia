@@ -1,7 +1,6 @@
-package br.com.guilherme.assembleia.sessao.util;
+package br.com.guilherme.assembleia.util;
 
-import br.com.guilherme.assembleia.sessao.dto.AbrirSessaoRequestDTO;
-import br.com.guilherme.assembleia.sessao.model.Sessao;
+import br.com.guilherme.assembleia.dto.sessao.AbrirSessaoRequestDTO;
 
 public class SessaoUtil {
 

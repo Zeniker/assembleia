@@ -1,4 +1,4 @@
-package br.com.guilherme.assembleia.voto.dto;
+package br.com.guilherme.assembleia.dto.voto;
 
 import lombok.*;
 

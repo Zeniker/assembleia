@@ -1,10 +1,10 @@
 package br.com.guilherme.assembleia.controller;
 
-import br.com.guilherme.assembleia.commons.dto.ResponseDTO;
-import br.com.guilherme.assembleia.commons.enums.StatusResposta;
-import br.com.guilherme.assembleia.sessao.dto.AbrirSessaoRequestDTO;
-import br.com.guilherme.assembleia.sessao.dto.AbrirSessaoResponseDTO;
-import br.com.guilherme.assembleia.sessao.dto.ResultadoSessaoDTO;
+import br.com.guilherme.assembleia.dto.commons.ResponseDTO;
+import br.com.guilherme.assembleia.enums.StatusResposta;
+import br.com.guilherme.assembleia.dto.sessao.AbrirSessaoRequestDTO;
+import br.com.guilherme.assembleia.dto.sessao.AbrirSessaoResponseDTO;
+import br.com.guilherme.assembleia.dto.sessao.ResultadoSessaoDTO;
 import br.com.guilherme.assembleia.sessao.model.Sessao;
 import br.com.guilherme.assembleia.service.sessao.SessaoServiceImpl;
 import org.junit.jupiter.api.DisplayName;

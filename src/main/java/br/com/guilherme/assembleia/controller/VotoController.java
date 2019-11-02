@@ -1,8 +1,8 @@
 package br.com.guilherme.assembleia.controller;
 
-import br.com.guilherme.assembleia.commons.dto.ResponseDTO;
-import br.com.guilherme.assembleia.voto.dto.RegistrarVotoRequestDTO;
-import br.com.guilherme.assembleia.voto.dto.RegistrarVotoResponseDTO;
+import br.com.guilherme.assembleia.dto.commons.ResponseDTO;
+import br.com.guilherme.assembleia.dto.voto.RegistrarVotoRequestDTO;
+import br.com.guilherme.assembleia.dto.voto.RegistrarVotoResponseDTO;
 import br.com.guilherme.assembleia.voto.model.Voto;
 import br.com.guilherme.assembleia.service.voto.VotoServiceImpl;
 import lombok.extern.slf4j.Slf4j;

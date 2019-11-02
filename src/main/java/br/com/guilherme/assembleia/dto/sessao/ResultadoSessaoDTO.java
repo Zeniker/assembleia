@@ -1,6 +1,6 @@
-package br.com.guilherme.assembleia.sessao.dto;
+package br.com.guilherme.assembleia.dto.sessao;
 
-import br.com.guilherme.assembleia.sessao.model.enums.SituacaoVotacao;
+import br.com.guilherme.assembleia.enums.SituacaoVotacao;
 import lombok.*;
 
 /**

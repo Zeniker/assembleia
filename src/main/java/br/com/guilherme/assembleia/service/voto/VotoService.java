@@ -1,6 +1,6 @@
 package br.com.guilherme.assembleia.service.voto;
 
-import br.com.guilherme.assembleia.voto.dto.RegistrarVotoRequestDTO;
+import br.com.guilherme.assembleia.dto.voto.RegistrarVotoRequestDTO;
 import br.com.guilherme.assembleia.voto.model.Voto;
 
 import java.util.List;

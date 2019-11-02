@@ -1,9 +1,9 @@
 package br.com.guilherme.assembleia.controller;
 
-import br.com.guilherme.assembleia.commons.dto.ResponseDTO;
-import br.com.guilherme.assembleia.commons.enums.StatusResposta;
-import br.com.guilherme.assembleia.voto.dto.RegistrarVotoRequestDTO;
-import br.com.guilherme.assembleia.voto.dto.RegistrarVotoResponseDTO;
+import br.com.guilherme.assembleia.dto.commons.ResponseDTO;
+import br.com.guilherme.assembleia.enums.StatusResposta;
+import br.com.guilherme.assembleia.dto.voto.RegistrarVotoRequestDTO;
+import br.com.guilherme.assembleia.dto.voto.RegistrarVotoResponseDTO;
 import br.com.guilherme.assembleia.voto.model.Voto;
 import br.com.guilherme.assembleia.service.voto.VotoServiceImpl;
 import org.junit.jupiter.api.DisplayName;

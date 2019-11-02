@@ -1,7 +1,7 @@
 package br.com.guilherme.assembleia.voto.model;
 
 import br.com.guilherme.assembleia.sessao.model.Sessao;
-import br.com.guilherme.assembleia.voto.model.enums.VotoEscolha;
+import br.com.guilherme.assembleia.enums.VotoEscolha;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 

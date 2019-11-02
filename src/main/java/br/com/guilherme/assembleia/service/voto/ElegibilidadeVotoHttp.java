@@ -1,6 +1,6 @@
 package br.com.guilherme.assembleia.service.voto;
 
-import br.com.guilherme.assembleia.voto.dto.CPFStatusDTO;
+import br.com.guilherme.assembleia.dto.voto.CPFStatusDTO;
 import br.com.guilherme.assembleia.voto.exception.CPFInvalidoException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;

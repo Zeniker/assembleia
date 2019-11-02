@@ -1,4 +1,4 @@
-package br.com.guilherme.assembleia.sessao.dto;
+package br.com.guilherme.assembleia.dto.sessao;
 
 import lombok.*;
 

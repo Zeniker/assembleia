@@ -1,4 +1,4 @@
-package br.com.guilherme.assembleia.voto.model.enums;
+package br.com.guilherme.assembleia.enums;
 
 /**
  * Enum com as possíveis escolhas de um voto

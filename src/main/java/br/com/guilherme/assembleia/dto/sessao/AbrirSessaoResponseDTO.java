@@ -1,4 +1,4 @@
-package br.com.guilherme.assembleia.voto.dto;
+package br.com.guilherme.assembleia.dto.sessao;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -6,16 +6,16 @@ import lombok.Getter;
 import lombok.ToString;
 
 /**
- * DTO de response para registro de voto
+ * DTO de response de abertura de uma sessão
  *
  * @author Guilherme Lacerda
  */
 @Data
-public class RegistrarVotoResponseDTO {
+public class AbrirSessaoResponseDTO {
 
     private Integer id;
 
-    public RegistrarVotoResponseDTO(Integer id) {
+    public AbrirSessaoResponseDTO(Integer id) {
         this.id = id;
     }
 

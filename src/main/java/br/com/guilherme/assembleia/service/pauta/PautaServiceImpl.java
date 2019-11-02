@@ -1,6 +1,6 @@
 package br.com.guilherme.assembleia.service.pauta;
 
-import br.com.guilherme.assembleia.pauta.dto.NovaPautaRequestDTO;
+import br.com.guilherme.assembleia.dto.pauta.NovaPautaRequestDTO;
 import br.com.guilherme.assembleia.pauta.exceptions.PautaNaoEncontradaException;
 import br.com.guilherme.assembleia.pauta.model.Pauta;
 import br.com.guilherme.assembleia.pauta.repository.PautaRepository;
