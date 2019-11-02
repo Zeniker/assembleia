@@ -14,7 +14,7 @@ public class SwaggerConfiguration {
     public Docket api(){
         return new Docket(DocumentationType.SPRING_WEB)
                 .select()
-                .apis(RequestHandlerSelectors.any())
+                .apis(RequestHandlerSelectors.basePackage("br.com.guilherme.assembleia.controller"))
                 .paths(PathSelectors.any())
                 .build();
     }
