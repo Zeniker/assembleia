@@ -12,6 +12,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
@@ -38,13 +40,14 @@ class VotoControllerTest {
         given(votoService.registrarVoto(any(RegistrarVotoRequestDTO.class))).willReturn(voto);
 
         //when
-        ResponseDTO<RegistrarVotoResponseDTO> responseDTO = votoController.registrarVoto(new RegistrarVotoRequestDTO());
+        ResponseEntity<RegistrarVotoResponseDTO> responseDTO = votoController.registrarVoto(new RegistrarVotoRequestDTO());
 
         //then
         then(votoService).should().registrarVoto(any(RegistrarVotoRequestDTO.class));
-        assertThat(responseDTO.getStatus()).isEqualTo(StatusResposta.SUCESSO);
-        assertThat(responseDTO.getMensagem()).isEqualTo("Voto registrado com sucesso");
-        assertThat(responseDTO.getData().getId()).isEqualTo(1);
+        assertThat(responseDTO.getBody()).isNotNull();
+        assertThat(responseDTO.getStatusCode()).isEqualTo(HttpStatus.OK);
+        assertThat(responseDTO.getBody().getMensagemErro()).isNull();
+        assertThat(responseDTO.getBody().getId()).isEqualTo(1);
     }
 
     @DisplayName("Teste registro de voto inválido")
@@ -54,10 +57,12 @@ class VotoControllerTest {
         doThrow(RuntimeException.class).when(votoService).registrarVoto(any(RegistrarVotoRequestDTO.class));
 
         //when
-        ResponseDTO<RegistrarVotoResponseDTO> responseDTO = votoController.registrarVoto(new RegistrarVotoRequestDTO());
+        ResponseEntity<RegistrarVotoResponseDTO> responseDTO = votoController.registrarVoto(new RegistrarVotoRequestDTO());
 
         //then
         then(votoService).should().registrarVoto(any(RegistrarVotoRequestDTO.class));
-        assertThat(responseDTO.getStatus()).isEqualTo(StatusResposta.ERRO);
+        assertThat(responseDTO.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
+        assertThat(responseDTO.getBody()).isNotNull();
+        assertThat(responseDTO.getBody().getMensagemErro()).isNotNull();
     }
 }

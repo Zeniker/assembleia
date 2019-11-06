@@ -6,6 +6,8 @@ import br.com.guilherme.assembleia.dto.pauta.NovaPautaResponseDTO;
 import br.com.guilherme.assembleia.entity.Pauta;
 import br.com.guilherme.assembleia.service.pauta.PautaServiceImpl;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,21 +38,17 @@ public class PautaController {
      * @return DTO com mensagem de sucessso e os dados da nova pauta, ou em caso de erro, uma mensagem de erro
      */
     @PostMapping
-    public ResponseDTO<NovaPautaResponseDTO> criarPauta(@RequestBody @Valid NovaPautaRequestDTO requestDTO){
-        ResponseDTO<NovaPautaResponseDTO> response;
-
+    public ResponseEntity<NovaPautaResponseDTO> criarPauta(@RequestBody @Valid NovaPautaRequestDTO requestDTO){
         try{
             Pauta pauta = pautaService.criarPauta(requestDTO);
             NovaPautaResponseDTO responseDTO = new NovaPautaResponseDTO();
             responseDTO.setId(pauta.getId());
 
-            response = new ResponseDTO<>("Pauta criada com sucesso", responseDTO);
+            return ResponseEntity.ok(responseDTO);
 
         }catch (Exception e){
             log.error("Erro ao criar pauta", e);
-            response = new ResponseDTO<>(e);
+            return ResponseEntity.badRequest().body(new NovaPautaResponseDTO(e.getMessage()));
         }
-
-        return response;
     }
 }

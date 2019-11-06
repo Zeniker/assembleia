@@ -1,5 +1,6 @@
 package br.com.guilherme.assembleia.dto.sessao;
 
+import br.com.guilherme.assembleia.dto.commons.ResponseDTO;
 import br.com.guilherme.assembleia.enums.SituacaoVotacao;
 import lombok.*;
 
@@ -11,7 +12,9 @@ import java.io.Serializable;
  * @author Guilherme Lacerda
  */
 @Data
-public class ResultadoSessaoDTO implements Serializable {
+@EqualsAndHashCode(callSuper = false)
+@NoArgsConstructor
+public class ResultadoSessaoDTO extends ResponseDTO {
 
     private Integer idSessao;
     private Integer totalVotos;
@@ -19,4 +22,8 @@ public class ResultadoSessaoDTO implements Serializable {
     private Integer totalVotosContra;
     private SituacaoVotacao situacao;
 
+    public ResultadoSessaoDTO(String mensagemErro) {
+
+        super(mensagemErro);
+    }
 }

@@ -1,5 +1,6 @@
 package br.com.guilherme.assembleia.dto.pauta;
 
+import br.com.guilherme.assembleia.dto.commons.ResponseDTO;
 import lombok.*;
 
 /**
@@ -8,8 +9,14 @@ import lombok.*;
  * @author Guilherme Lacerda
  */
 @Data
-public class NovaPautaResponseDTO {
+@EqualsAndHashCode(callSuper = false)
+@NoArgsConstructor
+public class NovaPautaResponseDTO extends ResponseDTO {
 
     private Integer id;
 
+    public NovaPautaResponseDTO(String mensagemErro) {
+
+        super(mensagemErro);
+    }
 }

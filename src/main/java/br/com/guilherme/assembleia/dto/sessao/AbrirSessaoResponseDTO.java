@@ -1,9 +1,7 @@
 package br.com.guilherme.assembleia.dto.sessao;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.ToString;
+import br.com.guilherme.assembleia.dto.commons.ResponseDTO;
+import lombok.*;
 
 /**
  * DTO de response de abertura de uma sessão
@@ -11,7 +9,9 @@ import lombok.ToString;
  * @author Guilherme Lacerda
  */
 @Data
-public class AbrirSessaoResponseDTO {
+@EqualsAndHashCode(callSuper = false)
+@NoArgsConstructor
+public class AbrirSessaoResponseDTO extends ResponseDTO {
 
     private Integer id;
 
@@ -19,4 +19,8 @@ public class AbrirSessaoResponseDTO {
         this.id = id;
     }
 
+    public AbrirSessaoResponseDTO(String mensagemErro) {
+
+        super(mensagemErro);
+    }
 }
