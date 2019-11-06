@@ -32,8 +32,6 @@ public class SessaoServiceImpl implements SessaoService{
 
     private PautaServiceImpl pautaService;
 
-    private VotoRepository votoRepository;
-
     private QueueSender queueSender;
 
     public SessaoServiceImpl(SessaoRepository sessaoRepository, PautaServiceImpl pautaService, VotoRepository votoRepository,
@@ -41,7 +39,6 @@ public class SessaoServiceImpl implements SessaoService{
 
         this.sessaoRepository = sessaoRepository;
         this.pautaService = pautaService;
-        this.votoRepository = votoRepository;
         this.queueSender = queueSender;
     }
 
@@ -117,7 +114,7 @@ public class SessaoServiceImpl implements SessaoService{
         Sessao sessao = buscarSessaoPorId(id);
         if (isSessaoAberta(sessao)) throw new SessaoAbertaException();
 
-        List<Voto> votos = votoRepository.findBySessao(sessao);
+        List<Voto> votos = sessao.getVotos();
 
         Integer totalAFavor = votos.stream()
                 .filter(voto -> voto.getEscolha() == VotoEscolha.SIM)
@@ -130,7 +127,16 @@ public class SessaoServiceImpl implements SessaoService{
 
         ResultadoSessaoDTO resultado = new ResultadoSessaoDTO();
         resultado.setTotalVotos(votos.size());
-        resultado.setSituacao(SituacaoVotacao.getSituacao(totalAFavor, totalContra));
+
+        SituacaoVotacao situacaoVotacao = SituacaoVotacao.EMPATE;
+
+        if(totalAFavor > totalContra){
+            situacaoVotacao = SituacaoVotacao.APROVADA;
+        }else if(totalAFavor < totalContra){
+            situacaoVotacao = SituacaoVotacao.REPROVADA;
+        }
+
+        resultado.setSituacao(situacaoVotacao);
         resultado.setTotalVotosAFavor(totalAFavor);
         resultado.setTotalVotosContra(totalContra);
         resultado.setIdSessao(id);
