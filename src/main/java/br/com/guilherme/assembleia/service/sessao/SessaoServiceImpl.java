@@ -12,7 +12,9 @@ import br.com.guilherme.assembleia.repository.SessaoRepository;
 import br.com.guilherme.assembleia.entity.Voto;
 import br.com.guilherme.assembleia.enums.VotoEscolha;
 import br.com.guilherme.assembleia.repository.VotoRepository;
+import org.hibernate.Hibernate;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -110,9 +112,12 @@ public class SessaoServiceImpl implements SessaoService{
      * @param id Utilizado para encontrar a sessão e seus dados
      * @return Objeto com a contabilização de votos da sessão e sua situação
      */
+    @Transactional(readOnly = true)
     public ResultadoSessaoDTO buscarResultadoSessao(Integer id) {
         Sessao sessao = buscarSessaoPorId(id);
         if (isSessaoAberta(sessao)) throw new SessaoAbertaException();
+
+        Hibernate.initialize(sessao);
 
         List<Voto> votos = sessao.getVotos();
 

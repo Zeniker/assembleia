@@ -32,7 +32,7 @@ public class Sessao {
     @NotNull
     private LocalDateTime dataHoraFechamento;
 
-    @OneToMany
+    @OneToMany(mappedBy = "sessao", fetch = FetchType.LAZY)
     private List<Voto> votos;
 
 
