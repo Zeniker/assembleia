@@ -63,7 +63,6 @@ class SessaoControllerTest {
         then(sessaoService).should().abrirSessao(any(AbrirSessaoRequestDTO.class));
         assertThat(responseDTO.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
         assertThat(responseDTO.getBody()).isNotNull();
-        assertThat(responseDTO.getBody().getMensagemErro()).isNotNull();
     }
 
     @DisplayName("Teste buscar resultado sessão")
@@ -97,6 +96,5 @@ class SessaoControllerTest {
         then(sessaoService).should().buscarResultadoSessao(any(Integer.class));
         assertThat(responseDTO.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
         assertThat(responseDTO.getBody()).isNotNull();
-        assertThat(responseDTO.getBody().getMensagemErro()).isNotNull();
     }
 }

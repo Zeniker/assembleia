@@ -63,6 +63,5 @@ class VotoControllerTest {
         then(votoService).should().registrarVoto(any(RegistrarVotoRequestDTO.class));
         assertThat(responseDTO.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
         assertThat(responseDTO.getBody()).isNotNull();
-        assertThat(responseDTO.getBody().getMensagemErro()).isNotNull();
     }
 }

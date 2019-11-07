@@ -62,7 +62,6 @@ class PautaControllerTest {
         then(pautaService).should().criarPauta(any(NovaPautaRequestDTO.class));
         assertThat(responseDTO.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
         assertThat(responseDTO.getBody()).isNotNull();
-        assertThat(responseDTO.getBody().getMensagemErro()).isNotNull();
 
     }
 }
