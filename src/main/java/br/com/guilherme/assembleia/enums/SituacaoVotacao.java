@@ -7,11 +7,4 @@ package br.com.guilherme.assembleia.enums;
  */
 public enum SituacaoVotacao {
     APROVADA, REPROVADA, EMPATE;
-
-    public static SituacaoVotacao getSituacao(Integer votosAFavor, Integer votosContra){
-        if (votosAFavor.equals(votosContra)) return EMPATE;
-        if (votosAFavor > votosContra) return APROVADA;
-
-        return REPROVADA;
-    }
 }

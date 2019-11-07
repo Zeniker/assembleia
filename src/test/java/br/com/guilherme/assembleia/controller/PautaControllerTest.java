@@ -12,6 +12,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
@@ -38,13 +40,13 @@ class PautaControllerTest {
         given(pautaService.criarPauta(any(NovaPautaRequestDTO.class))).willReturn(pauta);
 
         //when
-        ResponseDTO<NovaPautaResponseDTO> responseDTO = pautaController.criarPauta(new NovaPautaRequestDTO());
+        ResponseEntity<NovaPautaResponseDTO> responseDTO = pautaController.criarPauta(new NovaPautaRequestDTO());
 
         //then
         then(pautaService).should().criarPauta(any(NovaPautaRequestDTO.class));
-        assertThat(responseDTO.getStatus()).isEqualTo(StatusResposta.SUCESSO);
-        assertThat(responseDTO.getMensagem()).isEqualTo("Pauta criada com sucesso");
-        assertThat(responseDTO.getData().getId()).isEqualTo(1);
+        assertThat(responseDTO.getBody()).isNotNull();
+        assertThat(responseDTO.getStatusCode()).isEqualTo(HttpStatus.OK);
+        assertThat(responseDTO.getBody().getId()).isEqualTo(1);
     }
 
     @DisplayName("Teste criar pauta inválida")
@@ -54,12 +56,12 @@ class PautaControllerTest {
         doThrow(RuntimeException.class).when(pautaService).criarPauta(any(NovaPautaRequestDTO.class));
 
         //when
-        ResponseDTO<NovaPautaResponseDTO> responseDTO = pautaController.criarPauta(new NovaPautaRequestDTO());
+        ResponseEntity<NovaPautaResponseDTO> responseDTO = pautaController.criarPauta(new NovaPautaRequestDTO());
 
         //then
         then(pautaService).should().criarPauta(any(NovaPautaRequestDTO.class));
-        assertThat(responseDTO.getStatus()).isEqualTo(StatusResposta.ERRO);
-        assertThat(responseDTO.getData()).isNull();
+        assertThat(responseDTO.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
+        assertThat(responseDTO.getBody()).isNotNull();
 
     }
 }

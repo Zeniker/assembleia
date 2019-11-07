@@ -155,8 +155,8 @@ class SessaoServiceImplTest {
         //given
         List<Voto> votoList = Arrays.asList(votoAFavor, votoContra, votoAFavor);
 
+        sessao.setVotos(votoList);
         given(sessaoRepository.findById(any())).willReturn(Optional.of(sessao));
-        given(votoRepository.findBySessao(any(Sessao.class))).willReturn(votoList);
 
         //when
         ResultadoSessaoDTO resultadoSessao = sessaoService.buscarResultadoSessao(1);
@@ -174,8 +174,8 @@ class SessaoServiceImplTest {
         //given
         List<Voto> votoList = Arrays.asList(votoAFavor, votoContra, votoContra);
 
+        sessao.setVotos(votoList);
         given(sessaoRepository.findById(any())).willReturn(Optional.of(sessao));
-        given(votoRepository.findBySessao(any(Sessao.class))).willReturn(votoList);
 
         //when
         ResultadoSessaoDTO resultadoSessao = sessaoService.buscarResultadoSessao(1);
@@ -193,8 +193,8 @@ class SessaoServiceImplTest {
         //given
         List<Voto> votoList = Arrays.asList(votoAFavor, votoContra);
 
+        sessao.setVotos(votoList);
         given(sessaoRepository.findById(any())).willReturn(Optional.of(sessao));
-        given(votoRepository.findBySessao(any(Sessao.class))).willReturn(votoList);
 
         //when
         ResultadoSessaoDTO resultadoSessao = sessaoService.buscarResultadoSessao(1);

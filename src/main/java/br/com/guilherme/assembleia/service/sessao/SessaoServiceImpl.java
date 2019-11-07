@@ -12,7 +12,9 @@ import br.com.guilherme.assembleia.repository.SessaoRepository;
 import br.com.guilherme.assembleia.entity.Voto;
 import br.com.guilherme.assembleia.enums.VotoEscolha;
 import br.com.guilherme.assembleia.repository.VotoRepository;
+import org.hibernate.Hibernate;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -32,8 +34,6 @@ public class SessaoServiceImpl implements SessaoService{
 
     private PautaServiceImpl pautaService;
 
-    private VotoRepository votoRepository;
-
     private QueueSender queueSender;
 
     public SessaoServiceImpl(SessaoRepository sessaoRepository, PautaServiceImpl pautaService, VotoRepository votoRepository,
@@ -41,7 +41,6 @@ public class SessaoServiceImpl implements SessaoService{
 
         this.sessaoRepository = sessaoRepository;
         this.pautaService = pautaService;
-        this.votoRepository = votoRepository;
         this.queueSender = queueSender;
     }
 
@@ -113,11 +112,14 @@ public class SessaoServiceImpl implements SessaoService{
      * @param id Utilizado para encontrar a sessão e seus dados
      * @return Objeto com a contabilização de votos da sessão e sua situação
      */
+    @Transactional(readOnly = true)
     public ResultadoSessaoDTO buscarResultadoSessao(Integer id) {
         Sessao sessao = buscarSessaoPorId(id);
         if (isSessaoAberta(sessao)) throw new SessaoAbertaException();
 
-        List<Voto> votos = votoRepository.findBySessao(sessao);
+        Hibernate.initialize(sessao);
+
+        List<Voto> votos = sessao.getVotos();
 
         Integer totalAFavor = votos.stream()
                 .filter(voto -> voto.getEscolha() == VotoEscolha.SIM)
@@ -130,7 +132,16 @@ public class SessaoServiceImpl implements SessaoService{
 
         ResultadoSessaoDTO resultado = new ResultadoSessaoDTO();
         resultado.setTotalVotos(votos.size());
-        resultado.setSituacao(SituacaoVotacao.getSituacao(totalAFavor, totalContra));
+
+        SituacaoVotacao situacaoVotacao = SituacaoVotacao.EMPATE;
+
+        if(totalAFavor > totalContra){
+            situacaoVotacao = SituacaoVotacao.APROVADA;
+        }else if(totalAFavor < totalContra){
+            situacaoVotacao = SituacaoVotacao.REPROVADA;
+        }
+
+        resultado.setSituacao(situacaoVotacao);
         resultado.setTotalVotosAFavor(totalAFavor);
         resultado.setTotalVotosContra(totalContra);
         resultado.setIdSessao(id);

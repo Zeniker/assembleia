@@ -13,6 +13,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
@@ -39,13 +41,13 @@ class SessaoControllerTest {
         given(sessaoService.abrirSessao(any(AbrirSessaoRequestDTO.class))).willReturn(sessao);
 
         //when
-        ResponseDTO<AbrirSessaoResponseDTO> responseDTO = sessaoController.abrirSessao(new AbrirSessaoRequestDTO());
+        ResponseEntity<AbrirSessaoResponseDTO> responseDTO = sessaoController.abrirSessao(new AbrirSessaoRequestDTO());
 
         //then
         then(sessaoService).should().abrirSessao(any(AbrirSessaoRequestDTO.class));
-        assertThat(responseDTO.getStatus()).isEqualTo(StatusResposta.SUCESSO);
-        assertThat(responseDTO.getMensagem()).isEqualTo("Sessão aberta com sucesso");
-        assertThat(responseDTO.getData().getId()).isEqualTo(1);
+        assertThat(responseDTO.getStatusCode()).isEqualTo(HttpStatus.OK);
+        assertThat(responseDTO.getBody()).isNotNull();
+        assertThat(responseDTO.getBody().getId()).isEqualTo(1);
     }
 
     @DisplayName("Teste abrir sessão inválida")
@@ -55,11 +57,12 @@ class SessaoControllerTest {
         doThrow(RuntimeException.class).when(sessaoService).abrirSessao(any(AbrirSessaoRequestDTO.class));
 
         //when
-        ResponseDTO<AbrirSessaoResponseDTO> responseDTO = sessaoController.abrirSessao(new AbrirSessaoRequestDTO());
+        ResponseEntity<AbrirSessaoResponseDTO> responseDTO = sessaoController.abrirSessao(new AbrirSessaoRequestDTO());
 
         //then
         then(sessaoService).should().abrirSessao(any(AbrirSessaoRequestDTO.class));
-        assertThat(responseDTO.getStatus()).isEqualTo(StatusResposta.ERRO);
+        assertThat(responseDTO.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
+        assertThat(responseDTO.getBody()).isNotNull();
     }
 
     @DisplayName("Teste buscar resultado sessão")
@@ -71,13 +74,12 @@ class SessaoControllerTest {
         given(sessaoService.buscarResultadoSessao(any(Integer.class))).willReturn(resultado);
 
         //when
-        ResponseDTO<ResultadoSessaoDTO> responseDTO = sessaoController.buscarResultadoSessao(1);
+        ResponseEntity<ResultadoSessaoDTO> responseDTO = sessaoController.buscarResultadoSessao(1);
 
         //then
         then(sessaoService).should().buscarResultadoSessao(any(Integer.class));
-        assertThat(responseDTO.getStatus()).isEqualTo(StatusResposta.SUCESSO);
-        assertThat(responseDTO.getMensagem()).isEqualTo("Resultado consultado com sucesso");
-        assertThat(responseDTO.getData()).isNotNull();
+        assertThat(responseDTO.getStatusCode()).isEqualTo(HttpStatus.OK);
+        assertThat(responseDTO.getBody()).isNotNull();
 
     }
 
@@ -88,10 +90,11 @@ class SessaoControllerTest {
         doThrow(RuntimeException.class).when(sessaoService).buscarResultadoSessao(any(Integer.class));
 
         //when
-        ResponseDTO<ResultadoSessaoDTO> responseDTO = sessaoController.buscarResultadoSessao(1);
+        ResponseEntity<ResultadoSessaoDTO> responseDTO = sessaoController.buscarResultadoSessao(1);
 
         //then
         then(sessaoService).should().buscarResultadoSessao(any(Integer.class));
-        assertThat(responseDTO.getStatus()).isEqualTo(StatusResposta.ERRO);
+        assertThat(responseDTO.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
+        assertThat(responseDTO.getBody()).isNotNull();
     }
 }

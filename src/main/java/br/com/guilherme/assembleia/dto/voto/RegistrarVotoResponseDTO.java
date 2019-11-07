@@ -1,9 +1,7 @@
 package br.com.guilherme.assembleia.dto.voto;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.ToString;
+import br.com.guilherme.assembleia.dto.commons.ResponseDTO;
+import lombok.*;
 
 /**
  * DTO de response para registro de voto
@@ -11,7 +9,9 @@ import lombok.ToString;
  * @author Guilherme Lacerda
  */
 @Data
-public class RegistrarVotoResponseDTO {
+@EqualsAndHashCode(callSuper = false)
+@NoArgsConstructor
+public class RegistrarVotoResponseDTO extends ResponseDTO {
 
     private Integer id;
 
@@ -19,4 +19,8 @@ public class RegistrarVotoResponseDTO {
         this.id = id;
     }
 
+    public RegistrarVotoResponseDTO(String mensagemErro) {
+
+        super(mensagemErro);
+    }
 }

@@ -6,6 +6,7 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * Classe modelo para a tabela Sessao no banco de dados
@@ -30,6 +31,9 @@ public class Sessao {
 
     @NotNull
     private LocalDateTime dataHoraFechamento;
+
+    @OneToMany(mappedBy = "sessao", fetch = FetchType.LAZY)
+    private List<Voto> votos;
 
 
 }
